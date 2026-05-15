@@ -1,0 +1,434 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Currency Exchange API",
+    "description": "Provides daily currency exchange rates and performs conversions between a wide range of global currencies and cryptos. This API allows applications to access real-time foreign exchange data, making it ideal for e-commerce platforms, financial tools, and budgeting apps.",
+    "version": "2.0.0",
+    "contact": {
+      "name": "API Support",
+      "url": "https://www.juheapi.com/api-catalog/exchange-rate"
+    },
+    "termsOfService": "https://www.juheapi.com/terms-of-service"
+  },
+  "servers": [
+    {
+      "url": "https://hub.juheapi.com/exchangerate/v2",
+      "description": "Production server"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/convert": {
+      "get": {
+        "summary": "Convert currency",
+        "description": "Performs currency conversion between two currencies using the latest exchange rates. Returns the exchange rate and conversion result.",
+        "operationId": "convertCurrency",
+        "tags": [
+          "Currency Conversion"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Source currency code (e.g., USD, EUR, JPY)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "USD"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Target currency code (e.g., CNY, GBP, EUR)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "CNY"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "Amount to convert",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "format": "double",
+              "default": 1,
+              "example": 100
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "API key for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful conversion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversionResponse"
+                },
+                "example": {
+                  "code": "0",
+                  "msg": "Success",
+                  "convert_result": {
+                    "base": "USD",
+                    "target": "CNY",
+                    "rate": 7.26
+                  },
+                  "time_update": {
+                    "time_unix": 1750959474,
+                    "time_utc": "2025-06-26T03:17:54Z",
+                    "time_zone": "UTC"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rates": {
+      "get": {
+        "summary": "Get exchange rates",
+        "description": "Retrieves current exchange rates for a base currency against all supported currencies. Supports querying historical rates for a specific date.",
+        "operationId": "getExchangeRates",
+        "tags": [
+          "Exchange Rates"
+        ],
+        "parameters": [
+          {
+            "name": "base",
+            "in": "query",
+            "description": "Base currency code (e.g., USD, EUR, JPY)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "USD"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date for historical rates in YYYY-MM-DD format. If not provided, returns latest rates.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2025-06-26"
+            }
+          },
+          {
+            "name": "symbols",
+            "in": "query",
+            "description": "Comma-separated list of target currency codes to limit results (e.g., CNY,EUR,GBP)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "CNY,EUR,GBP"
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "API key for authentication",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with exchange rates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RatesResponse"
+                },
+                "example": {
+                  "code": "0",
+                  "msg": "Success",
+                  "base": "USD",
+                  "date": "2025-06-26",
+                  "rates": {
+                    "CNY": 7.26,
+                    "EUR": 0.92,
+                    "GBP": 0.79,
+                    "JPY": 149.85
+                  },
+                  "time_update": {
+                    "time_unix": 1750959474,
+                    "time_utc": "2025-06-26T03:17:54Z",
+                    "time_zone": "UTC"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests - Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "key",
+        "description": "API key for authentication. Get your free API key at https://www.juheapi.com"
+      }
+    },
+    "schemas": {
+      "ConversionResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Response code (0 indicates success)",
+            "example": "0"
+          },
+          "msg": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Success"
+          },
+          "convert_result": {
+            "$ref": "#/components/schemas/ConvertResult"
+          },
+          "time_update": {
+            "$ref": "#/components/schemas/TimeUpdate"
+          }
+        },
+        "required": [
+          "code",
+          "msg"
+        ]
+      },
+      "ConvertResult": {
+        "type": "object",
+        "properties": {
+          "base": {
+            "type": "string",
+            "description": "Base (source) currency code",
+            "example": "USD"
+          },
+          "target": {
+            "type": "string",
+            "description": "Target currency code",
+            "example": "CNY"
+          },
+          "rate": {
+            "type": "number",
+            "format": "double",
+            "description": "Exchange rate from base to target currency",
+            "example": 7.26
+          }
+        },
+        "required": [
+          "base",
+          "target",
+          "rate"
+        ]
+      },
+      "RatesResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Response code (0 indicates success)",
+            "example": "0"
+          },
+          "msg": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Success"
+          },
+          "base": {
+            "type": "string",
+            "description": "Base currency code",
+            "example": "USD"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "Date of the exchange rates",
+            "example": "2025-06-26"
+          },
+          "rates": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number",
+              "format": "double"
+            },
+            "description": "Map of currency codes to exchange rates",
+            "example": {
+              "CNY": 7.26,
+              "EUR": 0.92,
+              "GBP": 0.79,
+              "JPY": 149.85
+            }
+          },
+          "time_update": {
+            "$ref": "#/components/schemas/TimeUpdate"
+          }
+        },
+        "required": [
+          "code",
+          "msg",
+          "base",
+          "rates"
+        ]
+      },
+      "TimeUpdate": {
+        "type": "object",
+        "properties": {
+          "time_unix": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp of the last update",
+            "example": 1750959474
+          },
+          "time_utc": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp in ISO 8601 format",
+            "example": "2025-06-26T03:17:54Z"
+          },
+          "time_zone": {
+            "type": "string",
+            "description": "Time zone of the timestamp",
+            "example": "UTC"
+          }
+        },
+        "required": [
+          "time_unix",
+          "time_utc",
+          "time_zone"
+        ]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Error code",
+            "example": "400"
+          },
+          "msg": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Invalid currency code"
+          }
+        },
+        "required": [
+          "code",
+          "msg"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Currency Conversion",
+      "description": "Endpoints for converting amounts between currencies"
+    },
+    {
+      "name": "Exchange Rates",
+      "description": "Endpoints for retrieving current and historical exchange rates"
+    }
+  ]
+}

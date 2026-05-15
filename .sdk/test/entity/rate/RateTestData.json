@@ -1,0 +1,42 @@
+{
+  "existing": {
+    "rate": {
+      "RATE00": {
+        "base": "s3c",
+        "code": "s3d",
+        "date": "s3e",
+        "msg": "s3f",
+        "rate": {},
+        "time_update": {}
+      },
+      "RATE01": {
+        "base": "s78",
+        "code": "s79",
+        "date": "s7a",
+        "msg": "s7b",
+        "rate": {},
+        "time_update": {}
+      },
+      "RATE02": {
+        "base": "sb4",
+        "code": "sb5",
+        "date": "sb6",
+        "msg": "sb7",
+        "rate": {},
+        "time_update": {}
+      }
+    }
+  },
+  "new": {
+    "rate": {
+      "rate_ref01": {
+        "base": "sf0",
+        "code": "sf1",
+        "date": "sf2",
+        "msg": "sf3",
+        "rate": {},
+        "time_update": {}
+      }
+    }
+  }
+}

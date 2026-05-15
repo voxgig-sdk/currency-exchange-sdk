@@ -1,0 +1,211 @@
+# CurrencyExchange Python SDK Reference
+
+Complete API reference for the CurrencyExchange Python SDK.
+
+
+## CurrencyExchangeSDK
+
+### Constructor
+
+```python
+from currency-exchange_sdk import CurrencyExchangeSDK
+
+client = CurrencyExchangeSDK(options)
+```
+
+Create a new SDK client instance.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `options` | `dict` | SDK configuration options. |
+| `options["apikey"]` | `str` | API key for authentication. |
+| `options["base"]` | `str` | Base URL for API requests. |
+| `options["prefix"]` | `str` | URL prefix appended after base. |
+| `options["suffix"]` | `str` | URL suffix appended after path. |
+| `options["headers"]` | `dict` | Custom headers for all requests. |
+| `options["feature"]` | `dict` | Feature configuration. |
+| `options["system"]` | `dict` | System overrides (e.g. custom fetch). |
+
+
+### Static Methods
+
+#### `CurrencyExchangeSDK.test(testopts=None, sdkopts=None)`
+
+Create a test client with mock features active. Both arguments may be `None`.
+
+```python
+client = CurrencyExchangeSDK.test()
+```
+
+
+### Instance Methods
+
+#### `Convert(data=None)`
+
+Create a new `ConvertEntity` instance. Pass `None` for no initial data.
+
+#### `Rate(data=None)`
+
+Create a new `RateEntity` instance. Pass `None` for no initial data.
+
+#### `options_map() -> dict`
+
+Return a deep copy of the current SDK options.
+
+#### `get_utility() -> Utility`
+
+Return a copy of the SDK utility object.
+
+#### `direct(fetchargs=None) -> tuple`
+
+Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+
+**Parameters:**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| `fetchargs["path"]` | `str` | URL path with optional `{param}` placeholders. |
+| `fetchargs["method"]` | `str` | HTTP method (default: `"GET"`). |
+| `fetchargs["params"]` | `dict` | Path parameter values. |
+| `fetchargs["query"]` | `dict` | Query string parameters. |
+| `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
+| `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
+
+**Returns:** `(result_dict, err)`
+
+#### `prepare(fetchargs=None) -> tuple`
+
+Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+
+
+---
+
+## ConvertEntity
+
+```python
+convert = client.Convert()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `code` | ``$STRING`` | Yes |  |
+| `convert_result` | ``$OBJECT`` | Yes |  |
+| `msg` | ``$STRING`` | Yes |  |
+| `time_update` | ``$OBJECT`` | Yes |  |
+
+### Operations
+
+#### `load(reqmatch, ctrl=None) -> tuple`
+
+Load a single entity matching the given criteria.
+
+```python
+result, err = client.Convert().load({"id": "convert_id"})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `ConvertEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## RateEntity
+
+```python
+rate = client.Rate()
+```
+
+### Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `base` | ``$STRING`` | Yes |  |
+| `code` | ``$STRING`` | Yes |  |
+| `date` | ``$STRING`` | No |  |
+| `msg` | ``$STRING`` | Yes |  |
+| `rate` | ``$OBJECT`` | Yes |  |
+| `time_update` | ``$OBJECT`` | Yes |  |
+
+### Operations
+
+#### `load(reqmatch, ctrl=None) -> tuple`
+
+Load a single entity matching the given criteria.
+
+```python
+result, err = client.Rate().load({"id": "rate_id"})
+```
+
+### Common Methods
+
+#### `data_get() -> dict`
+
+Get the entity data.
+
+#### `data_set(data)`
+
+Set the entity data.
+
+#### `match_get() -> dict`
+
+Get the entity match criteria.
+
+#### `match_set(match)`
+
+Set the entity match criteria.
+
+#### `make() -> Entity`
+
+Create a new `RateEntity` instance with the same options.
+
+#### `get_name() -> str`
+
+Return the entity name.
+
+
+---
+
+## Features
+
+| Feature | Version | Description |
+| --- | --- | --- |
+| `test` | 0.0.1 | In-memory mock transport for testing without a live server |
+
+
+Features are activated via the `feature` option:
+
+```python
+client = CurrencyExchangeSDK({
+    "feature": {
+        "test": {"active": True},
+    },
+})
+```
+

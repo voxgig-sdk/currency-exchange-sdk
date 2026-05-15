@@ -1,0 +1,28 @@
+# BasicRateFlow
+
+main: kit: flow: BasicRateFlow:
+{
+  entity: "rate",
+  kind: "basic",
+  name: "BasicRateFlow",
+  step: [
+    {
+      input: {
+        ref: "rate_ref01",
+        srcdatavar: "rate_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-rate_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicRateFlow"
+}

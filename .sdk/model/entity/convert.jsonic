@@ -1,0 +1,95 @@
+# Entity: convert
+
+main: kit: entity: convert: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "code"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "convert_result"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "msg"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "time_update"
+      req: true
+      type: "`$OBJECT`"
+    }
+  ]
+
+  name: "convert"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: 100
+                kind: "query"
+                name: "amount"
+                orig: "amount"
+                reqd: false
+                type: "`$NUMBER`"
+              }
+              {
+                example: "USD"
+                kind: "query"
+                name: "from"
+                orig: "from"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "key"
+                orig: "key"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: "CNY"
+                kind: "query"
+                name: "to"
+                orig: "to"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/convert"
+          parts: [
+            "convert"
+          ]
+          select: {
+            exist: [
+              "amount"
+              "from"
+              "key"
+              "to"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

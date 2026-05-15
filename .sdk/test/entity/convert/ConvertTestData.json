@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "convert": {
+      "CONVERT00": {
+        "code": "s28",
+        "convert_result": {},
+        "msg": "s2a",
+        "time_update": {}
+      },
+      "CONVERT01": {
+        "code": "s50",
+        "convert_result": {},
+        "msg": "s52",
+        "time_update": {}
+      },
+      "CONVERT02": {
+        "code": "s78",
+        "convert_result": {},
+        "msg": "s7a",
+        "time_update": {}
+      }
+    }
+  },
+  "new": {
+    "convert": {
+      "convert_ref01": {
+        "code": "sa0",
+        "convert_result": {},
+        "msg": "sa2",
+        "time_update": {}
+      }
+    }
+  }
+}

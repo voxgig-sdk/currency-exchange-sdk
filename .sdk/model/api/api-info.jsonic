@@ -1,0 +1,25 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "API Support"
+        url: "https://www.juheapi.com/api-catalog/exchange-rate"
+      }
+      description: "Provides daily currency exchange rates and performs conversions between a wide range of global currencies and cryptos. This API allows applications to access real-time foreign exchange data, making it ideal for e-commerce platforms, financial tools, and budgeting apps."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://hub.juheapi.com/exchangerate/v2"
+        }
+      ]
+      termsOfService: "https://www.juheapi.com/terms-of-service"
+      title: "Currency Exchange API"
+      version: "2.0.0"
+    }
+  }
+}
+
+}
