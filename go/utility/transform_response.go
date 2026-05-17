@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/currency-exchange-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/currency-exchange-sdk/core"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/core"
 )
 
 func transformResponseUtil(ctx *core.Context) any {

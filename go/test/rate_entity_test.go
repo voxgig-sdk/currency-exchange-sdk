@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/currency-exchange-sdk"
-	"github.com/voxgig-sdk/currency-exchange-sdk/core"
+	sdk "github.com/voxgig-sdk/currency-exchange-sdk/go"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/currency-exchange-sdk/go/utility/struct"
 )
 
 func TestRateEntity(t *testing.T) {

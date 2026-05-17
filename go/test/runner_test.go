@@ -12,9 +12,9 @@ import (
 	"sync"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/currency-exchange-sdk"
+	sdk "github.com/voxgig-sdk/currency-exchange-sdk/go"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/currency-exchange-sdk/go/utility/struct"
 )
 
 var envLocalOnce sync.Once

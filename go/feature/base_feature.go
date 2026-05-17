@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/currency-exchange-sdk/core"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/core"
 )
 
 type BaseFeature struct {

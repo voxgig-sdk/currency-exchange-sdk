@@ -1,10 +1,10 @@
 package voxgigcurrencyexchangesdk
 
 import (
-	"github.com/voxgig-sdk/currency-exchange-sdk/core"
-	"github.com/voxgig-sdk/currency-exchange-sdk/entity"
-	"github.com/voxgig-sdk/currency-exchange-sdk/feature"
-	_ "github.com/voxgig-sdk/currency-exchange-sdk/utility"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/core"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/entity"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/feature"
+	_ "github.com/voxgig-sdk/currency-exchange-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

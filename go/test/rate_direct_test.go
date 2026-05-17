@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/currency-exchange-sdk"
-	"github.com/voxgig-sdk/currency-exchange-sdk/core"
+	sdk "github.com/voxgig-sdk/currency-exchange-sdk/go"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/core"
 )
 
 func TestRateDirect(t *testing.T) {

@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"github.com/voxgig-sdk/currency-exchange-sdk/core"
+	"github.com/voxgig-sdk/currency-exchange-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/currency-exchange-sdk/go/utility/struct"
 )
 
 type ConvertEntity struct {

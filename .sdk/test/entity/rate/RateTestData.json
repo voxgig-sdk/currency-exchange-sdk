@@ -7,7 +7,8 @@
         "date": "s3e",
         "msg": "s3f",
         "rate": {},
-        "time_update": {}
+        "time_update": {},
+        "id": "RATE00"
       },
       "RATE01": {
         "base": "s78",
@@ -15,7 +16,8 @@
         "date": "s7a",
         "msg": "s7b",
         "rate": {},
-        "time_update": {}
+        "time_update": {},
+        "id": "RATE01"
       },
       "RATE02": {
         "base": "sb4",
@@ -23,7 +25,8 @@
         "date": "sb6",
         "msg": "sb7",
         "rate": {},
-        "time_update": {}
+        "time_update": {},
+        "id": "RATE02"
       }
     }
   },
