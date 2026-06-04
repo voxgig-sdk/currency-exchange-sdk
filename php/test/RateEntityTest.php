@@ -85,7 +85,6 @@ function rate_basic_setup($extra)
         "CURRENCYEXCHANGE_TEST_RATE_ENTID" => $idmap,
         "CURRENCYEXCHANGE_TEST_LIVE" => "FALSE",
         "CURRENCYEXCHANGE_TEST_EXPLAIN" => "FALSE",
-        "CURRENCYEXCHANGE_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +96,6 @@ function rate_basic_setup($extra)
     if ($env["CURRENCYEXCHANGE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["CURRENCYEXCHANGE_APIKEY"],
             ],
             $extra ?? [],
         ]);

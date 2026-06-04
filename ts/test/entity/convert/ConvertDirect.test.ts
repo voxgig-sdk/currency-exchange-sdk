@@ -79,14 +79,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'CURRENCYEXCHANGE_TEST_CONVERT_ENTID': {},
     'CURRENCYEXCHANGE_TEST_LIVE': 'FALSE',
-    'CURRENCYEXCHANGE_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.CURRENCYEXCHANGE_TEST_LIVE
 
   if (live) {
     const client = new CurrencyExchangeSDK({
-      apikey: env.CURRENCYEXCHANGE_APIKEY,
     })
 
     let idmap: any = env['CURRENCYEXCHANGE_TEST_CONVERT_ENTID']

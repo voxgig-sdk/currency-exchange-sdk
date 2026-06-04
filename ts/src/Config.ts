@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://hub.juheapi.com/exchangerate/v2',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

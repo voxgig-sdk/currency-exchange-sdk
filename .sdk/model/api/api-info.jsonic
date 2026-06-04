@@ -18,8 +18,23 @@ main: {
       termsOfService: "https://www.juheapi.com/terms-of-service"
       title: "Currency Exchange API"
       version: "2.0.0"
+      tagline: "Daily exchange rates and on-demand conversions across global fiat currencies and major cryptocurrencies"
+      homepage: "https://hub.juheapi.com/exchangerate/v2"
+      docs_url: "https://hub.juheapi.com/exchangerate/v2"
+      about_md: `The Currency Exchange API is published on the [Juhe API hub](https://hub.juheapi.com/), a marketplace of HTTP APIs aggregated behind a single key-based gateway. The service exposes daily foreign-exchange rates and a conversion calculator that spans a broad set of national currencies plus major cryptocurrencies such as BTC.
+
+What you get from the API:
+
+- A lookup of supported currency codes so callers can validate inputs before pricing a conversion.
+- A conversion endpoint that takes a source code, a target code and an amount, and returns the converted value at the latest published rate.
+- Coverage across global fiat currencies and selected crypto assets.
+
+Operational notes: requests are authenticated with an \`apikey\` query parameter issued by Juhe. The freepublicapis.com directory currently lists CORS as disabled, an average response time around 826 ms and a 100% reliability score over the last 30 days, so browser-side calls should be proxied through your own backend.`
+      entity_desc: {
+        convert: "Converts an amount from one currency code to another using the latest published rate, exposed as a GET endpoint that takes source, target and amount parameters."
+        rate: "Lists the currency and cryptocurrency codes supported by the service so callers can validate inputs before requesting a conversion."
+      }
+      auth: false
     }
   }
-}
-
 }
