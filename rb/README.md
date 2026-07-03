@@ -10,13 +10,13 @@ The Ruby SDK for the CurrencyExchange API — an entity-oriented client using id
 
 ## Install
 ```bash
-gem install currency-exchange-sdk
+gem install voxgig-sdk-currency-exchange
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "currency-exchange-sdk"
+gem "voxgig-sdk-currency-exchange"
 ```
 
 Then run:

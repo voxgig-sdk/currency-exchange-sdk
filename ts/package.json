@@ -1,7 +1,23 @@
 {
   "name": "@voxgig-sdk/currency-exchange",
   "version": "0.0.1",
-  "description": "DESCRIPTION",
+  "description": "Unofficial generated TypeScript SDK for the Currency Exchange public API. Not affiliated with or endorsed by the upstream API provider.",
+  "keywords": [
+    "voxgig",
+    "sdk",
+    "generated-sdk",
+    "openapi",
+    "api-client",
+    "currency-exchange"
+  ],
+  "homepage": "https://github.com/voxgig-sdk/currency-exchange-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig-sdk/currency-exchange-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voxgig-sdk/currency-exchange-sdk/issues"
+  },
   "main": "dist/CurrencyExchangeSDK.js",
   "type": "commonjs",
   "types": "dist/CurrencyExchangeSDK.d.ts",
@@ -14,7 +30,10 @@
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm run build && npm test"
   },
-  "author": "CurrencyExchange",
+  "author": {
+    "name": "Voxgig",
+    "url": "https://voxgig.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "peerDependencies": {},

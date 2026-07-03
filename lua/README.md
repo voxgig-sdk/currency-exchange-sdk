@@ -10,7 +10,7 @@ The Lua SDK for the CurrencyExchange API — an entity-oriented client using Lua
 
 ## Install
 ```bash
-luarocks install currency-exchange-sdk
+luarocks install voxgig-sdk-currency-exchange
 ```
 
 If the module is not yet published, add the source directory to

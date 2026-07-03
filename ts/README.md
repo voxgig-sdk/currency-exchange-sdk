@@ -10,7 +10,7 @@ The TypeScript SDK for the CurrencyExchange API — a type-safe, entity-oriented
 
 ## Install
 ```bash
-npm install currency-exchange
+npm install @voxgig-sdk/currency-exchange
 ```
 ## Tutorial: your first API call
 

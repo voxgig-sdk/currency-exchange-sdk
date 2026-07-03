@@ -10,7 +10,7 @@ The Python SDK for the CurrencyExchange API — an entity-oriented client follow
 
 ## Install
 ```bash
-pip install currency-exchange-sdk
+pip install voxgig-sdk-currency-exchange
 ```
 
 Or install from source:

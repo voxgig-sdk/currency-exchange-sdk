@@ -10,7 +10,7 @@ The PHP SDK for the CurrencyExchange API — an entity-oriented client using PHP
 
 ## Install
 ```bash
-composer require voxgig/currency-exchange-sdk
+composer require voxgig-sdk/currency-exchange
 ```
 
 
