@@ -1,6 +1,11 @@
 # CurrencyExchange Python SDK
 
-The Python SDK for the CurrencyExchange API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the CurrencyExchange API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,15 +28,18 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from currencyexchange_sdk import CurrencyExchangeSDK
 
-client = CurrencyExchangeSDK({})
+client = CurrencyExchangeSDK({
+    "apikey": os.environ.get("CURRENCY-EXCHANGE_APIKEY"),
+})
 ```
 
 ### 3. Load a convert
 
 ```python
-result, err = client.Convert(None).load({"id": "example_id"}, None)
+result, err = client.Convert().load({"id": "example_id"})
 if err:
     raise Exception(err)
 print(result)
@@ -79,11 +87,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = CurrencyExchangeSDK.test(None, None)
+client = CurrencyExchangeSDK.test()
 
-result, err = client.CurrencyExchange(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.CurrencyExchange().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -114,6 +120,7 @@ Create a `.env.local` file at the project root:
 
 ```
 CURRENCY-EXCHANGE_TEST_LIVE=TRUE
+CURRENCY-EXCHANGE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -137,6 +144,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

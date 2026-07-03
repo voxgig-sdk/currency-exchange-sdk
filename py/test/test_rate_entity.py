@@ -91,6 +91,7 @@ def _rate_basic_setup(extra):
         "CURRENCYEXCHANGE_TEST_RATE_ENTID": idmap,
         "CURRENCYEXCHANGE_TEST_LIVE": "FALSE",
         "CURRENCYEXCHANGE_TEST_EXPLAIN": "FALSE",
+        "CURRENCYEXCHANGE_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -101,6 +102,7 @@ def _rate_basic_setup(extra):
     if env.get("CURRENCYEXCHANGE_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("CURRENCYEXCHANGE_APIKEY"),
             },
             extra or {},
         ])

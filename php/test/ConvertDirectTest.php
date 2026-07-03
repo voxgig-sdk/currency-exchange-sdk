@@ -74,12 +74,14 @@ function convert_direct_setup($mockres)
     $env = Runner::env_override([
         "CURRENCYEXCHANGE_TEST_CONVERT_ENTID" => [],
         "CURRENCYEXCHANGE_TEST_LIVE" => "FALSE",
+        "CURRENCYEXCHANGE_APIKEY" => "NONE",
     ]);
 
     $live = $env["CURRENCYEXCHANGE_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["CURRENCYEXCHANGE_APIKEY"],
         ];
         $client = new CurrencyExchangeSDK($merged_opts);
         return [

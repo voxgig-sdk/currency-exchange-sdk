@@ -1,20 +1,8 @@
 # CurrencyExchange SDK
 
-Daily exchange rates and on-demand conversions across global fiat currencies and major cryptocurrencies
+Currency Exchange API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Currency Exchange API
-
-The Currency Exchange API is published on the [Juhe API hub](https://hub.juheapi.com/), a marketplace of HTTP APIs aggregated behind a single key-based gateway. The service exposes daily foreign-exchange rates and a conversion calculator that spans a broad set of national currencies plus major cryptocurrencies such as BTC.
-
-What you get from the API:
-
-- A lookup of supported currency codes so callers can validate inputs before pricing a conversion.
-- A conversion endpoint that takes a source code, a target code and an amount, and returns the converted value at the latest published rate.
-- Coverage across global fiat currencies and selected crypto assets.
-
-Operational notes: requests are authenticated with an `apikey` query parameter issued by Juhe. The freepublicapis.com directory currently lists CORS as disabled, an average response time around 826 ms and a 100% reliability score over the last 30 days, so browser-side calls should be proxied through your own backend.
 
 ## Try it
 
@@ -48,27 +36,31 @@ gem install currency-exchange-sdk
 luarocks install currency-exchange-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { CurrencyExchangeSDK } from 'currency-exchange'
 
-const client = new CurrencyExchangeSDK({})
+const client = new CurrencyExchangeSDK({
+  apikey: process.env.CURRENCY-EXCHANGE_APIKEY,
+})
 
+// Load convert data
+const convert = await client.Convert().load({})
+console.log(convert.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -98,8 +90,8 @@ The API exposes 2 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Convert** | Converts an amount from one currency code to another using the latest published rate, exposed as a GET endpoint that takes source, target and amount parameters. | `/convert` |
-| **Rate** | Lists the currency and cryptocurrency codes supported by the service so callers can validate inputs before requesting a conversion. | `/rates` |
+| **Convert** |  | `/convert` |
+| **Rate** |  | `/rates` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -109,15 +101,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from currencyexchange_sdk import CurrencyExchangeSDK
 
-client = CurrencyExchangeSDK({})
+client = CurrencyExchangeSDK({
+    "apikey": os.environ.get("CURRENCY-EXCHANGE_APIKEY"),
+})
 
 
 # Load a specific convert
-convert, err = client.Convert(None).load(
-    {"id": "example_id"}, None
-)
+convert, err = client.Convert().load({"id": "example_id"})
+print(convert)
 ```
 
 ### PHP
@@ -126,13 +120,14 @@ convert, err = client.Convert(None).load(
 <?php
 require_once 'currencyexchange_sdk.php';
 
-$client = new CurrencyExchangeSDK([]);
+$client = new CurrencyExchangeSDK([
+    "apikey" => getenv("CURRENCY-EXCHANGE_APIKEY"),
+]);
 
 
 // Load a specific convert
-[$convert, $err] = $client->Convert(null)->load(
-    ["id" => "example_id"], null
-);
+[$convert, $err] = $client->Convert()->load(["id" => "example_id"]);
+print_r($convert);
 ```
 
 ### Golang
@@ -140,8 +135,13 @@ $client = new CurrencyExchangeSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/currency-exchange-sdk/go"
 
-client := sdk.NewCurrencyExchangeSDK(map[string]any{})
+client := sdk.NewCurrencyExchangeSDK(map[string]any{
+    "apikey": os.Getenv("CURRENCY-EXCHANGE_APIKEY"),
+})
 
+// Load convert data
+convert, err := client.Convert(nil).Load(map[string]any{}, nil)
+fmt.Println(convert)
 ```
 
 ### Ruby
@@ -149,13 +149,14 @@ client := sdk.NewCurrencyExchangeSDK(map[string]any{})
 ```ruby
 require_relative "CurrencyExchange_sdk"
 
-client = CurrencyExchangeSDK.new({})
+client = CurrencyExchangeSDK.new({
+  "apikey" => ENV["CURRENCY-EXCHANGE_APIKEY"],
+})
 
 
 # Load a specific convert
-convert, err = client.Convert(nil).load(
-  { "id" => "example_id" }, nil
-)
+convert, err = client.Convert().load({ "id" => "example_id" })
+puts convert
 ```
 
 ### Lua
@@ -163,13 +164,14 @@ convert, err = client.Convert(nil).load(
 ```lua
 local sdk = require("currency-exchange_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("CURRENCY-EXCHANGE_APIKEY"),
+})
 
 
 -- Load a specific convert
-local convert, err = client:Convert(nil):load(
-  { id = "example_id" }, nil
-)
+local convert, err = client:Convert():load({ id = "example_id" })
+print(convert)
 ```
 
 ## Unit testing in offline mode
@@ -188,25 +190,21 @@ const result = await client.Convert().load({ id: 'test01' })
 ### Python
 
 ```python
-client = CurrencyExchangeSDK.test(None, None)
-result, err = client.Convert(None).load(
-    {"id": "test01"}, None
-)
+client = CurrencyExchangeSDK.test()
+result, err = client.Convert().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = CurrencyExchangeSDK::test(null, null);
-[$result, $err] = $client->Convert(null)->load(
-    ["id" => "test01"], null
-);
+$client = CurrencyExchangeSDK::test();
+[$result, $err] = $client->Convert()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Convert(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -215,19 +213,15 @@ result, err := client.Convert(nil).Load(
 ### Ruby
 
 ```ruby
-client = CurrencyExchangeSDK.test(nil, nil)
-result, err = client.Convert(nil).load(
-  { "id" => "test01" }, nil
-)
+client = CurrencyExchangeSDK.test
+result, err = client.Convert().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Convert(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Convert():load({ id = "test01" })
 ```
 
 ## How it works
@@ -331,10 +325,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Currency Exchange API
-
-- Upstream: [https://hub.juheapi.com/exchangerate/v2](https://hub.juheapi.com/exchangerate/v2)
 
 ---
 

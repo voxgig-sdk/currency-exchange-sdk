@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'CURRENCY_EXCHANGE_TEST_RATE_ENTID': idmap,
     'CURRENCY_EXCHANGE_TEST_LIVE': 'FALSE',
     'CURRENCY_EXCHANGE_TEST_EXPLAIN': 'FALSE',
+    'CURRENCY_EXCHANGE_APIKEY': 'NONE',
   })
 
   idmap = env['CURRENCY_EXCHANGE_TEST_RATE_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new CurrencyExchangeSDK(merge([
       {
+        apikey: env.CURRENCY_EXCHANGE_APIKEY,
       },
       extra
     ]))
