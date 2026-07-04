@@ -91,7 +91,7 @@ same parameters as `direct()`. Raises on error.
 ## ConvertEntity
 
 ```ruby
-convert = client.convert
+convert = client.Convert
 ```
 
 ### Fields
@@ -110,7 +110,7 @@ convert = client.convert
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.convert.load({ "id" => "convert_id" })
+result = client.Convert.load({ "id" => "convert_id" })
 ```
 
 ### Common Methods
@@ -146,7 +146,7 @@ Return the entity name.
 ## RateEntity
 
 ```ruby
-rate = client.rate
+rate = client.Rate
 ```
 
 ### Fields
@@ -167,7 +167,7 @@ rate = client.rate
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.rate.load({ "id" => "rate_id" })
+result = client.Rate.load({ "id" => "rate_id" })
 ```
 
 ### Common Methods

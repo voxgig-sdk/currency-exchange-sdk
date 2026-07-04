@@ -90,7 +90,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## ConvertEntity
 
 ```php
-$convert = $client->convert();
+$convert = $client->Convert();
 ```
 
 ### Fields
@@ -109,7 +109,7 @@ $convert = $client->convert();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->convert()->load(["id" => "convert_id"]);
+$result = $client->Convert()->load(["id" => "convert_id"]);
 ```
 
 ### Common Methods
@@ -145,7 +145,7 @@ Return the entity name.
 ## RateEntity
 
 ```php
-$rate = $client->rate();
+$rate = $client->Rate();
 ```
 
 ### Fields
@@ -166,7 +166,7 @@ $rate = $client->rate();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->rate()->load(["id" => "rate_id"]);
+$result = $client->Rate()->load(["id" => "rate_id"]);
 ```
 
 ### Common Methods

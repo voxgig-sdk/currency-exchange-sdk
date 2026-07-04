@@ -233,10 +233,10 @@ class CurrencyExchangeSDK
 
     private $_convert = null;
 
-    // Idiomatic facade: $client->convert()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Convert() (PHP method
-    // names are case-insensitive).
-    public function convert($data = null)
+    // Canonical facade: $client->Convert()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->convert()
+    // resolves here too.
+    public function Convert($data = null)
     {
         require_once __DIR__ . '/entity/convert_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class CurrencyExchangeSDK
 
     private $_rate = null;
 
-    // Idiomatic facade: $client->rate()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Rate() (PHP method
-    // names are case-insensitive).
-    public function rate($data = null)
+    // Canonical facade: $client->Rate()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->rate()
+    // resolves here too.
+    public function Rate($data = null)
     {
         require_once __DIR__ . '/entity/rate_entity.php';
         if ($data === null) {

@@ -35,9 +35,10 @@ $client = new CurrencyExchangeSDK([
 
 ```php
 try {
-    $result = $client->convert()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Convert record (throws on error).
+    $convert = $client->Convert()->load(["id" => "example_id"]);
+    print_r($convert);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -83,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = CurrencyExchangeSDK::test();
+$client = CurrencyExchangeSDK::test([
+    "entity" => ["convert" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->convert()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$convert = $client->Convert()->load(["id" => "test01"]);
+print_r($convert);
 ```
 
 ### Use a custom fetch function
@@ -246,7 +251,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.convert`
+Create an instance: `$convert = $client->Convert();`
 
 #### Operations
 
@@ -265,14 +270,15 @@ Create an instance: `const convert = client.convert`
 
 #### Example: Load
 
-```ts
-const convert = await client.convert.load({ id: 'convert_id' })
+```php
+// load() returns the bare Convert record (throws on error).
+$convert = $client->Convert()->load(["id" => "convert_id"]);
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `$rate = $client->Rate();`
 
 #### Operations
 
@@ -293,8 +299,9 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```php
+// load() returns the bare Rate record (throws on error).
+$rate = $client->Rate()->load(["id" => "rate_id"]);
 ```
 
 
@@ -369,7 +376,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$convert = $client->convert();
+$convert = $client->Convert();
 $convert->load(["id" => "example_id"]);
 
 // $convert->dataGet() now returns the loaded convert data

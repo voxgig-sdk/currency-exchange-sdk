@@ -36,9 +36,9 @@ local client = sdk.new({
 ### 3. Load a convert
 
 ```lua
-local result, err = client:convert():load({ id = "example_id" })
+local convert, err = client:Convert():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(convert)
 ```
 
 
@@ -84,8 +84,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:convert():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Convert():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -188,17 +188,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local convert, err = client:Convert():load({ id = "example_id" })
+    if err then error(err) end
+    -- convert is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -237,7 +242,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.convert`
+Create an instance: `local convert = client:Convert(nil)`
 
 #### Operations
 
@@ -256,14 +261,14 @@ Create an instance: `const convert = client.convert`
 
 #### Example: Load
 
-```ts
-const convert = await client.convert.load({ id: 'convert_id' })
+```lua
+local convert, err = client:Convert():load({ id = "convert_id" })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `local rate = client:Rate(nil)`
 
 #### Operations
 
@@ -284,8 +289,8 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```lua
+local rate, err = client:Rate():load({ id = "rate_id" })
 ```
 
 
@@ -360,7 +365,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local convert = client:convert()
+local convert = client:Convert()
 convert:load({ id = "example_id" })
 
 -- convert:data_get() now returns the loaded convert data

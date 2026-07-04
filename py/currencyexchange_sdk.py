@@ -220,41 +220,21 @@ class CurrencyExchangeSDK:
         }
 
 
-    @property
-    def convert(self):
-        """Idiomatic facade: client.convert.list() / client.convert.load({"id": ...})."""
-        from entity.convert_entity import ConvertEntity
-        cached = getattr(self, "_convert", None)
-        if cached is None:
-            cached = ConvertEntity(self, None)
-            self._convert = cached
-        return cached
-
-    def Convert(self, data=None):
-        # Deprecated: use client.convert instead.
+    def Convert(self, data=None) -> "ConvertEntity":
+        """Entity factory: client.Convert().list({}) / client.Convert().load({"id": ...})."""
         from entity.convert_entity import ConvertEntity
         return ConvertEntity(self, data)
 
 
-    @property
-    def rate(self):
-        """Idiomatic facade: client.rate.list() / client.rate.load({"id": ...})."""
-        from entity.rate_entity import RateEntity
-        cached = getattr(self, "_rate", None)
-        if cached is None:
-            cached = RateEntity(self, None)
-            self._rate = cached
-        return cached
-
-    def Rate(self, data=None):
-        # Deprecated: use client.rate instead.
+    def Rate(self, data=None) -> "RateEntity":
+        """Entity factory: client.Rate().list({}) / client.Rate().load({"id": ...})."""
         from entity.rate_entity import RateEntity
         return RateEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "CurrencyExchangeSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -274,3 +254,10 @@ class CurrencyExchangeSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.convert_entity import ConvertEntity
+    from entity.rate_entity import RateEntity

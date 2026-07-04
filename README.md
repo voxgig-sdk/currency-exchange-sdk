@@ -28,9 +28,9 @@ const client = new CurrencyExchangeSDK({
   apikey: process.env.CURRENCY_EXCHANGE_APIKEY,
 })
 
-// Load convert data
-const convert = await client.convert.load({})
-console.log(convert.data)
+// Load convert data (returns a Convert)
+const convert = await client.Convert().load()
+console.log(convert)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -90,8 +90,8 @@ client = CurrencyExchangeSDK({
 })
 
 
-# Load a specific convert
-convert = client.convert.load({"id": "example_id"})
+# Load a specific convert (returns the record, raises on error)
+convert = client.Convert().load({"id": "example_id"})
 print(convert)
 ```
 
@@ -106,8 +106,8 @@ $client = new CurrencyExchangeSDK([
 ]);
 
 
-// Load a specific convert
-$convert = $client->convert()->load(["id" => "example_id"]);
+// Load a specific convert (returns the bare record; throws on error)
+$convert = $client->Convert()->load(["id" => "example_id"]);
 print_r($convert);
 ```
 
@@ -135,8 +135,8 @@ client = CurrencyExchangeSDK.new({
 })
 
 
-# Load a specific convert
-convert = client.convert.load({ "id" => "example_id" })
+# Load a specific convert (returns the bare record; raises on error)
+convert = client.Convert.load({ "id" => "example_id" })
 puts convert
 ```
 
@@ -151,7 +151,7 @@ local client = sdk.new({
 
 
 -- Load a specific convert
-local convert, err = client:convert():load({ id = "example_id" })
+local convert, err = client:Convert():load({ id = "example_id" })
 print(convert)
 ```
 
@@ -164,22 +164,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = CurrencyExchangeSDK.test()
-const result = await client.convert.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const convert = await client.Convert().load({ id: 'test01' })
+// convert is a bare Convert populated with mock data
+console.log(convert)
 ```
 
 ### Python
 
 ```python
 client = CurrencyExchangeSDK.test()
-result = client.convert.load({"id": "test01"})
+convert = client.Convert().load({"id": "test01"})
+print(convert)
 ```
 
 ### PHP
 
 ```php
-$client = CurrencyExchangeSDK::test();
-$result = $client->convert()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = CurrencyExchangeSDK::test([
+    "entity" => ["convert" => ["test01" => ["id" => "test01"]]],
+]);
+$convert = $client->Convert()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -194,15 +199,18 @@ result, err := client.Convert(nil).Load(
 ### Ruby
 
 ```ruby
-client = CurrencyExchangeSDK.test
-result = client.convert.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = CurrencyExchangeSDK.test({
+  "entity" => { "convert" => { "test01" => { "id" => "test01" } } },
+})
+convert = client.Convert.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:convert():load({ id = "test01" })
+local result, err = client:Convert():load({ id = "test01" })
 ```
 
 ## How it works
@@ -250,6 +258,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

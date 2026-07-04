@@ -88,7 +88,7 @@ same parameters as `direct()`.
 ## ConvertEntity
 
 ```lua
-local convert = client:convert(nil)
+local convert = client:Convert(nil)
 ```
 
 ### Fields
@@ -107,7 +107,7 @@ local convert = client:convert(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:convert():load({ id = "convert_id" })
+local result, err = client:Convert():load({ id = "convert_id" })
 ```
 
 ### Common Methods
@@ -143,7 +143,7 @@ Return the entity name.
 ## RateEntity
 
 ```lua
-local rate = client:rate(nil)
+local rate = client:Rate(nil)
 ```
 
 ### Fields
@@ -164,7 +164,7 @@ local rate = client:rate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:rate():load({ id = "rate_id" })
+local result, err = client:Rate():load({ id = "rate_id" })
 ```
 
 ### Common Methods

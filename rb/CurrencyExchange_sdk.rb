@@ -208,26 +208,14 @@ class CurrencyExchangeSDK
   end
 
 
-  # Idiomatic facade: client.convert.list / client.convert.load({ "id" => ... })
-  def convert
-    require_relative 'entity/convert_entity'
-    @convert ||= ConvertEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.convert instead.
+  # Canonical facade: client.Convert.list / client.Convert.load({ "id" => ... })
   def Convert(data = nil)
     require_relative 'entity/convert_entity'
     ConvertEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.rate.list / client.rate.load({ "id" => ... })
-  def rate
-    require_relative 'entity/rate_entity'
-    @rate ||= RateEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.rate instead.
+  # Canonical facade: client.Rate.list / client.Rate.load({ "id" => ... })
   def Rate(data = nil)
     require_relative 'entity/rate_entity'
     RateEntity.new(self, data)

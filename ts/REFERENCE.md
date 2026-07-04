@@ -122,7 +122,7 @@ Alias for `CurrencyExchangeSDK.test()`.
 ## ConvertEntity
 
 ```ts
-const convert = client.convert
+const convert = client.Convert()
 ```
 
 ### Fields
@@ -141,7 +141,7 @@ const convert = client.convert
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.convert.load({ id: 'convert_id' })
+const result = await client.Convert().load({ id: 'convert_id' })
 ```
 
 ### Common Methods
@@ -175,7 +175,7 @@ Return a copy of the entity options.
 ## RateEntity
 
 ```ts
-const rate = client.rate
+const rate = client.Rate()
 ```
 
 ### Fields
@@ -196,7 +196,7 @@ const rate = client.rate
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.rate.load({ id: 'rate_id' })
+const result = await client.Rate().load({ id: 'rate_id' })
 ```
 
 ### Common Methods

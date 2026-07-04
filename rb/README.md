@@ -34,8 +34,9 @@ client = CurrencyExchangeSDK.new({
 
 ```ruby
 begin
-  result = client.convert.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Convert record (raises on error).
+  convert = client.Convert.load({ "id" => "example_id" })
+  puts convert
 rescue => err
   warn "load failed: #{err}"
 end
@@ -82,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = CurrencyExchangeSDK.test
+client = CurrencyExchangeSDK.test({
+  "entity" => { "convert" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.convert.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+convert = client.Convert.load({ "id" => "test01" })
+puts convert
 ```
 
 ### Use a custom fetch function
@@ -241,7 +246,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.convert`
+Create an instance: `convert = client.Convert`
 
 #### Operations
 
@@ -260,14 +265,15 @@ Create an instance: `const convert = client.convert`
 
 #### Example: Load
 
-```ts
-const convert = await client.convert.load({ id: 'convert_id' })
+```ruby
+# load returns the bare Convert record (raises on error).
+convert = client.Convert.load({ "id" => "convert_id" })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `rate = client.Rate`
 
 #### Operations
 
@@ -288,8 +294,9 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```ruby
+# load returns the bare Rate record (raises on error).
+rate = client.Rate.load({ "id" => "rate_id" })
 ```
 
 
@@ -364,7 +371,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-convert = client.convert
+convert = client.Convert
 convert.load({ "id" => "example_id" })
 
 # convert.data_get now returns the loaded convert data

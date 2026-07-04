@@ -4,45 +4,48 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Convert:
+class Convert(TypedDict):
     code: str
     convert_result: dict
     msg: str
     time_update: dict
 
 
-@dataclass
-class ConvertLoadMatch:
-    code: Optional[str] = None
-    convert_result: Optional[dict] = None
-    msg: Optional[str] = None
-    time_update: Optional[dict] = None
+class ConvertLoadMatch(TypedDict, total=False):
+    code: str
+    convert_result: dict
+    msg: str
+    time_update: dict
 
 
-@dataclass
-class Rate:
+class RateRequired(TypedDict):
     base: str
     code: str
     msg: str
     rate: dict
     time_update: dict
-    date: Optional[str] = None
 
 
-@dataclass
-class RateLoadMatch:
-    base: Optional[str] = None
-    code: Optional[str] = None
-    date: Optional[str] = None
-    msg: Optional[str] = None
-    rate: Optional[dict] = None
-    time_update: Optional[dict] = None
+class Rate(RateRequired, total=False):
+    date: str
 
+
+class RateLoadMatch(TypedDict, total=False):
+    base: str
+    code: str
+    date: str
+    msg: str
+    rate: dict
+    time_update: dict

@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:convert():list() / client:convert():load({ id = ... })
-function CurrencyExchangeSDK:convert(data)
+-- Idiomatic facade: client:Convert():list() / client:Convert():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CurrencyExchangeSDK:Convert(data)
   local EntityMod = require("entity.convert_entity")
   if data == nil then
     if self._convert == nil then
@@ -256,15 +257,10 @@ function CurrencyExchangeSDK:convert(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:convert() instead.
-function CurrencyExchangeSDK:Convert(data)
-  local EntityMod = require("entity.convert_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:rate():list() / client:rate():load({ id = ... })
-function CurrencyExchangeSDK:rate(data)
+-- Idiomatic facade: client:Rate():list() / client:Rate():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function CurrencyExchangeSDK:Rate(data)
   local EntityMod = require("entity.rate_entity")
   if data == nil then
     if self._rate == nil then
@@ -272,12 +268,6 @@ function CurrencyExchangeSDK:rate(data)
     end
     return self._rate
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:rate() instead.
-function CurrencyExchangeSDK:Rate(data)
-  local EntityMod = require("entity.rate_entity")
   return EntityMod.new(self, data)
 end
 

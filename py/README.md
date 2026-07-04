@@ -36,10 +36,12 @@ client = CurrencyExchangeSDK({
 
 ### 3. Load a convert
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.convert.load({"id": "example_id"})
-    print(result)
+    convert = client.Convert().load({"id": "example_id"})
+    print(convert)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -87,8 +89,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = CurrencyExchangeSDK.test()
 
-result = client.convert.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+convert = client.Convert().load({"id": "test01"})
+# convert contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -242,7 +245,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.convert`
+Create an instance: `convert = client.Convert()`
 
 #### Operations
 
@@ -261,14 +264,14 @@ Create an instance: `const convert = client.convert`
 
 #### Example: Load
 
-```ts
-const convert = await client.convert.load({ id: 'convert_id' })
+```python
+convert = client.Convert().load({"id": "convert_id"})
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.rate`
+Create an instance: `rate = client.Rate()`
 
 #### Operations
 
@@ -289,8 +292,8 @@ Create an instance: `const rate = client.rate`
 
 #### Example: Load
 
-```ts
-const rate = await client.rate.load({ id: 'rate_id' })
+```python
+rate = client.Rate().load({"id": "rate_id"})
 ```
 
 
@@ -364,7 +367,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-convert = client.convert
+convert = client.Convert()
 convert.load({"id": "example_id"})
 
 # convert.data_get() now returns the loaded convert data

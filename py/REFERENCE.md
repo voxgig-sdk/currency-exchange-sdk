@@ -85,7 +85,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## ConvertEntity
 
 ```python
-convert = client.convert
+convert = client.Convert()
 ```
 
 ### Fields
@@ -104,7 +104,7 @@ convert = client.convert
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.convert.load({"id": "convert_id"})
+result = client.Convert().load({"id": "convert_id"})
 ```
 
 ### Common Methods
@@ -139,7 +139,7 @@ Return the entity name.
 ## RateEntity
 
 ```python
-rate = client.rate
+rate = client.Rate()
 ```
 
 ### Fields
@@ -160,7 +160,7 @@ rate = client.rate
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.rate.load({"id": "rate_id"})
+result = client.Rate().load({"id": "rate_id"})
 ```
 
 ### Common Methods

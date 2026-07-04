@@ -30,7 +30,12 @@ go mod edit -replace github.com/voxgig-sdk/currency-exchange-sdk/go=../currency-
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
@@ -38,31 +43,20 @@ package main
 import (
     "fmt"
     "os"
-
     sdk "github.com/voxgig-sdk/currency-exchange-sdk/go"
-    "github.com/voxgig-sdk/currency-exchange-sdk/go/core"
 )
 
 func main() {
     client := sdk.NewCurrencyExchangeSDK(map[string]any{
         "apikey": os.Getenv("CURRENCY_EXCHANGE_APIKEY"),
     })
-```
 
-### 3. Load a convert
-
-```go
-    result, err = client.Convert(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single convert — the value is the loaded record.
+    convert, err := client.Convert(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(convert)
 }
 ```
 
@@ -113,10 +107,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Convert(nil).Load(
+convert, err := client.Convert(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(convert) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -216,17 +213,24 @@ All entities implement the `CurrencyExchangeEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    convert, err := client.Convert(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // convert is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -285,7 +289,11 @@ Create an instance: `convert := client.Convert(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Convert(nil).Load(map[string]any{"id": "convert_id"}, nil)
+convert, err := client.Convert(nil).Load(map[string]any{"id": "convert_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(convert) // the loaded record
 ```
 
 
@@ -313,7 +321,11 @@ Create an instance: `rate := client.Rate(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+rate, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(rate) // the loaded record
 ```
 
 

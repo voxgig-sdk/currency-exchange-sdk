@@ -205,28 +205,14 @@ class CurrencyExchangeSDK {
 
 
 
-  _convert?: ConvertEntity
-
-  // Idiomatic facade: `client.convert.list()` / `client.convert.load({ id })`.
-  get convert(): ConvertEntity {
-    return (this._convert ??= new ConvertEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.convert` instead. */
+  // Entity access: `client.Convert().list()` / `client.Convert().load({ id })`.
   Convert(data?: any) {
     const self = this
     return new ConvertEntity(self,data)
   }
 
 
-  _rate?: RateEntity
-
-  // Idiomatic facade: `client.rate.list()` / `client.rate.load({ id })`.
-  get rate(): RateEntity {
-    return (this._rate ??= new RateEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.rate` instead. */
+  // Entity access: `client.Rate().list()` / `client.Rate().load({ id })`.
   Rate(data?: any) {
     const self = this
     return new RateEntity(self,data)
