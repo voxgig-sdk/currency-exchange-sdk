@@ -245,11 +245,17 @@ func (sdk *CurrencyExchangeSDK) Direct(fetchargs map[string]any) (map[string]any
 }
 
 
+// Convert returns a Convert entity bound to this client.
+// Idiomatic usage: client.Convert(nil).List(nil, nil) or
+// client.Convert(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CurrencyExchangeSDK) Convert(data map[string]any) CurrencyExchangeEntity {
 	return NewConvertEntityFunc(sdk, data)
 }
 
 
+// Rate returns a Rate entity bound to this client.
+// Idiomatic usage: client.Rate(nil).List(nil, nil) or
+// client.Rate(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *CurrencyExchangeSDK) Rate(data map[string]any) CurrencyExchangeEntity {
 	return NewRateEntityFunc(sdk, data)
 }

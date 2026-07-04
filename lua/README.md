@@ -9,12 +9,9 @@ The Lua SDK for the CurrencyExchange API — an entity-oriented client using Lua
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-currency-exchange
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/currency-exchange-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -32,14 +29,14 @@ loading a specific record.
 local sdk = require("currency-exchange_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("CURRENCY-EXCHANGE_APIKEY"),
+  apikey = os.getenv("CURRENCY_EXCHANGE_APIKEY"),
 })
 ```
 
 ### 3. Load a convert
 
 ```lua
-local result, err = client:Convert():load({ id = "example_id" })
+local result, err = client:convert():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:CurrencyExchange():load({ id = "test01" })
+local result, err = client:convert():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -120,8 +117,8 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-CURRENCY-EXCHANGE_TEST_LIVE=TRUE
-CURRENCY-EXCHANGE_APIKEY=<your-key>
+CURRENCY_EXCHANGE_TEST_LIVE=TRUE
+CURRENCY_EXCHANGE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -240,7 +237,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.Convert()`
+Create an instance: `const convert = client.convert`
 
 #### Operations
 
@@ -260,13 +257,13 @@ Create an instance: `const convert = client.Convert()`
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load({ id: 'convert_id' })
+const convert = await client.convert.load({ id: 'convert_id' })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.Rate()`
+Create an instance: `const rate = client.rate`
 
 #### Operations
 
@@ -288,7 +285,7 @@ Create an instance: `const rate = client.Rate()`
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load({ id: 'rate_id' })
+const rate = await client.rate.load({ id: 'rate_id' })
 ```
 
 
@@ -363,11 +360,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local convert = client:convert()
+convert:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- convert:data_get() now returns the loaded convert data
+-- convert:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

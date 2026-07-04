@@ -55,6 +55,9 @@ class RateEntity
         return new RateEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Rate|array $args Rate data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class RateEntity
         }
     }
 
+    /**
+     * @return Rate|array The current Rate data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Rate fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class RateEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Rate fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class RateEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Rate.
+     *
+     * @param RateLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed RateLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Rate|array The loaded Rate as an assoc-array at the
+     *   SDK boundary; throws CurrencyExchangeError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -117,7 +138,7 @@ class RateEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

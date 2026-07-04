@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Rate,
+  RateLoadMatch,
+} from '../CurrencyExchangeTypes'
 
 // TODO: needs Entity superclass
-class RateEntity extends CurrencyExchangeEntityBase {
+class RateEntity extends CurrencyExchangeEntityBase<Rate> {
 
   constructor(client: CurrencyExchangeSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class RateEntity extends CurrencyExchangeEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: RateLoadMatch, ctrl?: Control): Promise<Rate> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class RateEntity extends CurrencyExchangeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Rate> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

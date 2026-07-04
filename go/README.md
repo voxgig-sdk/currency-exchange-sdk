@@ -10,14 +10,18 @@ The Golang SDK for the CurrencyExchange API — an entity-oriented client using 
 
 ## Install
 ```bash
-go get github.com/voxgig-sdk/currency-exchange-sdk/go
+go get github.com/voxgig-sdk/currency-exchange-sdk/go@latest
 ```
 
-If the module is not yet published to a registry, use a `replace` directive
-in your `go.mod` to point to a local checkout:
+The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
+release tag — see [Releases](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) for the available versions.
+
+To vendor from a local checkout instead, clone this repo alongside your
+project and add a `replace` directive pointing at the checked-out
+`go/` directory:
 
 ```bash
-go mod edit -replace github.com/voxgig-sdk/currency-exchange-sdk/go=../path/to/github.com/voxgig-sdk/currency-exchange-sdk/go
+go mod edit -replace github.com/voxgig-sdk/currency-exchange-sdk/go=../currency-exchange-sdk/go
 ```
 
 
@@ -41,7 +45,7 @@ import (
 
 func main() {
     client := sdk.NewCurrencyExchangeSDK(map[string]any{
-        "apikey": os.Getenv("CURRENCY-EXCHANGE_APIKEY"),
+        "apikey": os.Getenv("CURRENCY_EXCHANGE_APIKEY"),
     })
 ```
 
@@ -109,7 +113,7 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Planet(nil).Load(
+result, err := client.Convert(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 // result contains mock response data
@@ -144,8 +148,8 @@ client := sdk.NewCurrencyExchangeSDK(map[string]any{
 Create a `.env.local` file at the project root:
 
 ```
-CURRENCY-EXCHANGE_TEST_LIVE=TRUE
-CURRENCY-EXCHANGE_APIKEY=<your-key>
+CURRENCY_EXCHANGE_TEST_LIVE=TRUE
+CURRENCY_EXCHANGE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -382,11 +386,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-moon := client.Moon(nil)
-moon.Load(map[string]any{"planet_id": "earth", "id": "luna"}, nil)
+convert := client.Convert(nil)
+convert.Load(map[string]any{"id": "example_id"}, nil)
 
-// moon.Data() now returns the loaded moon data
-// moon.Match() returns the last match criteria
+// convert.Data() now returns the loaded convert data
+// convert.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

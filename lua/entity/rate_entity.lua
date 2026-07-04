@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch RateLoadMatch
+---@param ctrl? table
+---@return Rate
+---@return string? err
 function RateEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

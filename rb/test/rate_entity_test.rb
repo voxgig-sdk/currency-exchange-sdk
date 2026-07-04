@@ -42,8 +42,7 @@ class RateEntityTest < Minitest::Test
     # LOAD
     rate_ref01_ent = client.Rate(nil)
     rate_ref01_match_dt0 = {}
-    rate_ref01_data_dt0_loaded, err = rate_ref01_ent.load(rate_ref01_match_dt0, nil)
-    assert_nil err
+    rate_ref01_data_dt0_loaded = rate_ref01_ent.load(rate_ref01_match_dt0, nil)
     assert !rate_ref01_data_dt0_loaded.nil?
 
   end

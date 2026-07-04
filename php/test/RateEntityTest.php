@@ -49,8 +49,7 @@ class RateEntityTest extends TestCase
         // LOAD
         $rate_ref01_ent = $client->Rate(null);
         $rate_ref01_match_dt0 = [];
-        [$rate_ref01_data_dt0_loaded, $err] = $rate_ref01_ent->load($rate_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $rate_ref01_data_dt0_loaded = $rate_ref01_ent->load($rate_ref01_match_dt0, null);
         $this->assertNotNull($rate_ref01_data_dt0_loaded);
 
     }

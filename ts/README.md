@@ -9,9 +9,12 @@ The TypeScript SDK for the CurrencyExchange API — a type-safe, entity-oriented
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/currency-exchange
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/currency-exchange-sdk/releases](https://github.com/voxgig-sdk/currency-exchange-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CurrencyExchangeSDK } from 'currency-exchange'
+import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange'
 
 const client = new CurrencyExchangeSDK({
-  apikey: process.env.CURRENCY-EXCHANGE_APIKEY,
+  apikey: process.env.CURRENCY_EXCHANGE_APIKEY,
 })
 ```
 
 ### 3. Load a convert
 
 ```ts
-const result = await client.Convert().load({ id: 'example_id' })
+const result = await client.convert.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CurrencyExchangeSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.convert.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.convert
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,8 +136,8 @@ const client = new CurrencyExchangeSDK({
 Create a `.env.local` file at the project root:
 
 ```
-CURRENCY-EXCHANGE_TEST_LIVE=TRUE
-CURRENCY-EXCHANGE_APIKEY=<your-key>
+CURRENCY_EXCHANGE_TEST_LIVE=TRUE
+CURRENCY_EXCHANGE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -285,7 +288,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.Convert()`
+Create an instance: `const convert = client.convert`
 
 #### Operations
 
@@ -305,13 +308,13 @@ Create an instance: `const convert = client.Convert()`
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load({ id: 'convert_id' })
+const convert = await client.convert.load({ id: 'convert_id' })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.Rate()`
+Create an instance: `const rate = client.rate`
 
 #### Operations
 
@@ -333,7 +336,7 @@ Create an instance: `const rate = client.Rate()`
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load({ id: 'rate_id' })
+const rate = await client.rate.load({ id: 'rate_id' })
 ```
 
 
@@ -394,7 +397,7 @@ currency-exchange/
 Import the SDK from the package root:
 
 ```ts
-import { CurrencyExchangeSDK } from 'currency-exchange'
+import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange'
 ```
 
 ### Entity state
@@ -404,11 +407,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const convert = client.convert
+await convert.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// convert.data() now returns the loaded convert data
+// convert.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

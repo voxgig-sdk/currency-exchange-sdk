@@ -9,9 +9,10 @@ The PHP SDK for the CurrencyExchange API — an entity-oriented client using PHP
 
 
 ## Install
-```bash
-composer require voxgig-sdk/currency-exchange
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/currency-exchange-sdk/releases](https://github.com/voxgig-sdk/currency-exchange-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,16 +27,19 @@ loading a specific record.
 require_once 'currencyexchange_sdk.php';
 
 $client = new CurrencyExchangeSDK([
-    "apikey" => getenv("CURRENCY-EXCHANGE_APIKEY"),
+    "apikey" => getenv("CURRENCY_EXCHANGE_APIKEY"),
 ]);
 ```
 
 ### 3. Load a convert
 
 ```php
-[$result, $err] = $client->Convert()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->convert()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 
@@ -46,28 +50,31 @@ print_r($result);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -81,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = CurrencyExchangeSDK::test();
 
-[$result, $err] = $client->CurrencyExchange()->load(["id" => "test01"]);
+$result = $client->convert()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -115,8 +122,8 @@ $client = new CurrencyExchangeSDK([
 Create a `.env.local` file at the project root:
 
 ```
-CURRENCY-EXCHANGE_TEST_LIVE=TRUE
-CURRENCY-EXCHANGE_APIKEY=<your-key>
+CURRENCY_EXCHANGE_TEST_LIVE=TRUE
+CURRENCY_EXCHANGE_APIKEY=<your-key>
 ```
 
 Then run:
@@ -186,8 +193,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -235,7 +246,7 @@ API path: `/rates`
 
 ### Convert
 
-Create an instance: `const convert = client.Convert()`
+Create an instance: `const convert = client.convert`
 
 #### Operations
 
@@ -255,13 +266,13 @@ Create an instance: `const convert = client.Convert()`
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load({ id: 'convert_id' })
+const convert = await client.convert.load({ id: 'convert_id' })
 ```
 
 
 ### Rate
 
-Create an instance: `const rate = client.Rate()`
+Create an instance: `const rate = client.rate`
 
 #### Operations
 
@@ -283,7 +294,7 @@ Create an instance: `const rate = client.Rate()`
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load({ id: 'rate_id' })
+const rate = await client.rate.load({ id: 'rate_id' })
 ```
 
 
@@ -358,11 +369,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$convert = $client->convert();
+$convert->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $convert->dataGet() now returns the loaded convert data
+// $convert->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

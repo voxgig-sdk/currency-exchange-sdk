@@ -49,8 +49,7 @@ class ConvertEntityTest extends TestCase
         // LOAD
         $convert_ref01_ent = $client->Convert(null);
         $convert_ref01_match_dt0 = [];
-        [$convert_ref01_data_dt0_loaded, $err] = $convert_ref01_ent->load($convert_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $convert_ref01_data_dt0_loaded = $convert_ref01_ent->load($convert_ref01_match_dt0, null);
         $this->assertNotNull($convert_ref01_data_dt0_loaded);
 
     }

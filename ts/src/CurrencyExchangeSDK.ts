@@ -3,6 +3,8 @@
 import { ConvertEntity } from './entity/ConvertEntity'
 import { RateEntity } from './entity/RateEntity'
 
+export type * from './CurrencyExchangeTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -203,12 +205,28 @@ class CurrencyExchangeSDK {
 
 
 
+  _convert?: ConvertEntity
+
+  // Idiomatic facade: `client.convert.list()` / `client.convert.load({ id })`.
+  get convert(): ConvertEntity {
+    return (this._convert ??= new ConvertEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.convert` instead. */
   Convert(data?: any) {
     const self = this
     return new ConvertEntity(self,data)
   }
 
 
+  _rate?: RateEntity
+
+  // Idiomatic facade: `client.rate.list()` / `client.rate.load({ id })`.
+  get rate(): RateEntity {
+    return (this._rate ??= new RateEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.rate` instead. */
   Rate(data?: any) {
     const self = this
     return new RateEntity(self,data)

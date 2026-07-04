@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Convert,
+  ConvertLoadMatch,
+} from '../CurrencyExchangeTypes'
 
 // TODO: needs Entity superclass
-class ConvertEntity extends CurrencyExchangeEntityBase {
+class ConvertEntity extends CurrencyExchangeEntityBase<Convert> {
 
   constructor(client: CurrencyExchangeSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class ConvertEntity extends CurrencyExchangeEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ConvertLoadMatch, ctrl?: Control): Promise<Convert> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class ConvertEntity extends CurrencyExchangeEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Convert> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

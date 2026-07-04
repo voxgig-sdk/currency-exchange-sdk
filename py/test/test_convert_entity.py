@@ -49,8 +49,7 @@ class TestConvertEntity:
         # LOAD
         convert_ref01_ent = client.Convert(None)
         convert_ref01_match_dt0 = {}
-        convert_ref01_data_dt0_loaded, err = convert_ref01_ent.load(convert_ref01_match_dt0, None)
-        assert err is None
+        convert_ref01_data_dt0_loaded = convert_ref01_ent.load(convert_ref01_match_dt0, None)
         assert convert_ref01_data_dt0_loaded is not None
 
 
