@@ -102,10 +102,10 @@ convert := client.Convert(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `convert_result` | ``$OBJECT`` | Yes |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `code` | `string` | Yes |  |
+| `convert_result` | `map[string]any` | Yes |  |
+| `msg` | `string` | Yes |  |
+| `time_update` | `map[string]any` | Yes |  |
 
 ### Operations
 
@@ -114,7 +114,7 @@ convert := client.Convert(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Convert(nil).Load(map[string]any{"id": "convert_id"}, nil)
+result, err := client.Convert(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -151,12 +151,12 @@ rate := client.Rate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `code` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | No |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `code` | `string` | Yes |  |
+| `date` | `string` | No |  |
+| `msg` | `string` | Yes |  |
+| `rate` | `map[string]any` | Yes |  |
+| `time_update` | `map[string]any` | Yes |  |
 
 ### Operations
 
@@ -165,7 +165,7 @@ rate := client.Rate(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+result, err := client.Rate(nil).Load(nil, nil)
 ```
 
 ### Common Methods

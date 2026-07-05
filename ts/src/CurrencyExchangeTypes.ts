@@ -12,7 +12,12 @@ export interface Convert {
   time_update: Record<string, any>
 }
 
-export type ConvertLoadMatch = Partial<Convert>
+export interface ConvertLoadMatch {
+  code?: string
+  convert_result?: Record<string, any>
+  msg?: string
+  time_update?: Record<string, any>
+}
 
 export interface Rate {
   base: string
@@ -23,5 +28,12 @@ export interface Rate {
   time_update: Record<string, any>
 }
 
-export type RateLoadMatch = Partial<Rate>
+export interface RateLoadMatch {
+  base?: string
+  code?: string
+  date?: string
+  msg?: string
+  rate?: Record<string, any>
+  time_update?: Record<string, any>
+}
 

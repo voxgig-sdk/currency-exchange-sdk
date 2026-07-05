@@ -4,6 +4,8 @@
 
 The Golang SDK for the CurrencyExchange API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Convert(nil)` — each with the same small set of operations (`Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -52,12 +54,41 @@ func main() {
     })
 
     // Load a single convert — the value is the loaded record.
-    convert, err := client.Convert(nil).Load(map[string]any{"id": "example_id"}, nil)
+    convert, err := client.Convert(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(convert)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+convert, err := client.Convert(nil).Load(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = convert
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -108,12 +139,12 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 convert, err := client.Convert(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(convert) // the loaded mock data
+fmt.Println(convert) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -202,10 +233,6 @@ All entities implement the `CurrencyExchangeEntity` interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -218,16 +245,15 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` | the entity record (`map[string]any`) |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    convert, err := client.Convert(nil).Load(map[string]any{"id": "example_id"}, nil)
+    convert, err := client.Convert(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // convert is the loaded record
+    // convert is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -281,15 +307,15 @@ Create an instance: `convert := client.Convert(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | ``$STRING`` |  |
-| `convert_result` | ``$OBJECT`` |  |
-| `msg` | ``$STRING`` |  |
-| `time_update` | ``$OBJECT`` |  |
+| `code` | `string` |  |
+| `convert_result` | `map[string]any` |  |
+| `msg` | `string` |  |
+| `time_update` | `map[string]any` |  |
 
 #### Example: Load
 
 ```go
-convert, err := client.Convert(nil).Load(map[string]any{"id": "convert_id"}, nil)
+convert, err := client.Convert(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -311,17 +337,17 @@ Create an instance: `rate := client.Rate(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | ``$STRING`` |  |
-| `code` | ``$STRING`` |  |
-| `date` | ``$STRING`` |  |
-| `msg` | ``$STRING`` |  |
-| `rate` | ``$OBJECT`` |  |
-| `time_update` | ``$OBJECT`` |  |
+| `base` | `string` |  |
+| `code` | `string` |  |
+| `date` | `string` |  |
+| `msg` | `string` |  |
+| `rate` | `map[string]any` |  |
+| `time_update` | `map[string]any` |  |
 
 #### Example: Load
 
 ```go
-rate, err := client.Rate(nil).Load(map[string]any{"id": "rate_id"}, nil)
+rate, err := client.Rate(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -329,12 +355,16 @@ fmt.Println(rate) // the loaded record
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -351,9 +381,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -399,9 +429,9 @@ stores the returned data and match criteria internally.
 
 ```go
 convert := client.Convert(nil)
-convert.Load(map[string]any{"id": "example_id"}, nil)
+convert.Load(nil, nil)
 
-// convert.Data() now returns the loaded convert data
+// convert.Data() now returns the convert data from the last load
 // convert.Match() returns the last match criteria
 ```
 

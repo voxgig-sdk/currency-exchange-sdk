@@ -8,7 +8,7 @@ Complete API reference for the CurrencyExchange Python SDK.
 ### Constructor
 
 ```python
-from currency-exchange_sdk import CurrencyExchangeSDK
+from currencyexchange_sdk import CurrencyExchangeSDK
 
 client = CurrencyExchangeSDK(options)
 ```
@@ -92,10 +92,10 @@ convert = client.Convert()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `convert_result` | ``$OBJECT`` | Yes |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `code` | `str` | Yes |  |
+| `convert_result` | `dict` | Yes |  |
+| `msg` | `str` | Yes |  |
+| `time_update` | `dict` | Yes |  |
 
 ### Operations
 
@@ -104,7 +104,7 @@ convert = client.Convert()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Convert().load({"id": "convert_id"})
+result = client.Convert().load()
 ```
 
 ### Common Methods
@@ -146,12 +146,12 @@ rate = client.Rate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `code` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | No |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `base` | `str` | Yes |  |
+| `code` | `str` | Yes |  |
+| `date` | `str` | No |  |
+| `msg` | `str` | Yes |  |
+| `rate` | `dict` | Yes |  |
+| `time_update` | `dict` | Yes |  |
 
 ### Operations
 
@@ -160,7 +160,7 @@ rate = client.Rate()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Rate().load({"id": "rate_id"})
+result = client.Rate().load()
 ```
 
 ### Common Methods

@@ -16,8 +16,7 @@ type Convert struct {
 	TimeUpdate map[string]any `json:"time_update"`
 }
 
-// ConvertLoadMatch mirrors the convert fields as an all-optional match
-// filter (Go analog of Partial<Convert>).
+// ConvertLoadMatch is the typed request payload for Convert.LoadTyped.
 type ConvertLoadMatch struct {
 	Code *string `json:"code,omitempty"`
 	ConvertResult *map[string]any `json:"convert_result,omitempty"`
@@ -35,8 +34,7 @@ type Rate struct {
 	TimeUpdate map[string]any `json:"time_update"`
 }
 
-// RateLoadMatch mirrors the rate fields as an all-optional match
-// filter (Go analog of Partial<Rate>).
+// RateLoadMatch is the typed request payload for Rate.LoadTyped.
 type RateLoadMatch struct {
 	Base *string `json:"base,omitempty"`
 	Code *string `json:"code,omitempty"`

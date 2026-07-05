@@ -21,7 +21,7 @@ class Convert
     public array $time_update;
 }
 
-/** Match filter for Convert#load (any subset of Convert fields). */
+/** Request payload for Convert#load. */
 class ConvertLoadMatch
 {
     public ?string $code = null;
@@ -41,7 +41,7 @@ class Rate
     public array $time_update;
 }
 
-/** Match filter for Rate#load (any subset of Rate fields). */
+/** Request payload for Rate#load. */
 class RateLoadMatch
 {
     public ?string $base = null;

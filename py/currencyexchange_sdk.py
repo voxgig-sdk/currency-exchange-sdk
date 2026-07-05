@@ -221,13 +221,13 @@ class CurrencyExchangeSDK:
 
 
     def Convert(self, data=None) -> "ConvertEntity":
-        """Entity factory: client.Convert().list({}) / client.Convert().load({"id": ...})."""
+        """Entity factory: client.Convert().list() / client.Convert().load({"id": ...})."""
         from entity.convert_entity import ConvertEntity
         return ConvertEntity(self, data)
 
 
     def Rate(self, data=None) -> "RateEntity":
-        """Entity factory: client.Rate().list({}) / client.Rate().load({"id": ...})."""
+        """Entity factory: client.Rate().list() / client.Rate().load({"id": ...})."""
         from entity.rate_entity import RateEntity
         return RateEntity(self, data)
 

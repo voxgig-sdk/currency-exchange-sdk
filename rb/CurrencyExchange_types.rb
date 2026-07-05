@@ -29,7 +29,7 @@ Convert = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Convert#load (any subset of Convert fields).
+# Request payload for Convert#load.
 #
 # @!attribute [rw] code
 #   @return [String, nil]
@@ -79,7 +79,7 @@ Rate = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Rate#load (any subset of Rate fields).
+# Request payload for Rate#load.
 #
 # @!attribute [rw] base
 #   @return [String, nil]

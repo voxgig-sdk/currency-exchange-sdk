@@ -8,7 +8,7 @@ Complete API reference for the CurrencyExchange Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'currency-exchange_sdk'
+require_relative 'CurrencyExchange_sdk'
 
 client = CurrencyExchangeSDK.new(options)
 ```
@@ -98,10 +98,10 @@ convert = client.Convert
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `convert_result` | ``$OBJECT`` | Yes |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `code` | `String` | Yes |  |
+| `convert_result` | `Hash` | Yes |  |
+| `msg` | `String` | Yes |  |
+| `time_update` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -110,7 +110,7 @@ convert = client.Convert
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Convert.load({ "id" => "convert_id" })
+result = client.Convert.load()
 ```
 
 ### Common Methods
@@ -153,12 +153,12 @@ rate = client.Rate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `code` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | No |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `base` | `String` | Yes |  |
+| `code` | `String` | Yes |  |
+| `date` | `String` | No |  |
+| `msg` | `String` | Yes |  |
+| `rate` | `Hash` | Yes |  |
+| `time_update` | `Hash` | Yes |  |
 
 ### Operations
 
@@ -167,7 +167,7 @@ rate = client.Rate
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Rate.load({ "id" => "rate_id" })
+result = client.Rate.load()
 ```
 
 ### Common Methods

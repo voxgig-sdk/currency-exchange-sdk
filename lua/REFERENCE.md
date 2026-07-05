@@ -95,10 +95,10 @@ local convert = client:Convert(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `convert_result` | ``$OBJECT`` | Yes |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `code` | `string` | Yes |  |
+| `convert_result` | `table` | Yes |  |
+| `msg` | `string` | Yes |  |
+| `time_update` | `table` | Yes |  |
 
 ### Operations
 
@@ -107,7 +107,7 @@ local convert = client:Convert(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Convert():load({ id = "convert_id" })
+local result, err = client:Convert():load()
 ```
 
 ### Common Methods
@@ -150,12 +150,12 @@ local rate = client:Rate(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `code` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | No |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `code` | `string` | Yes |  |
+| `date` | `string` | No |  |
+| `msg` | `string` | Yes |  |
+| `rate` | `table` | Yes |  |
+| `time_update` | `table` | Yes |  |
 
 ### Operations
 
@@ -164,7 +164,7 @@ local rate = client:Rate(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Rate():load({ id = "rate_id" })
+local result, err = client:Rate():load()
 ```
 
 ### Common Methods

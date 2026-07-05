@@ -8,7 +8,7 @@ Complete API reference for the CurrencyExchange PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/currency-exchange_sdk.php';
+require_once __DIR__ . '/currencyexchange_sdk.php';
 
 $client = new CurrencyExchangeSDK($options);
 ```
@@ -50,11 +50,11 @@ Create a new `ConvertEntity` instance. Pass `null` for no initial data.
 
 Create a new `RateEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): CurrencyExchangeUtility`
 
 Return a copy of the SDK utility object.
 
@@ -97,10 +97,10 @@ $convert = $client->Convert();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `convert_result` | ``$OBJECT`` | Yes |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `code` | `string` | Yes |  |
+| `convert_result` | `array` | Yes |  |
+| `msg` | `string` | Yes |  |
+| `time_update` | `array` | Yes |  |
 
 ### Operations
 
@@ -109,24 +109,24 @@ $convert = $client->Convert();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Convert()->load(["id" => "convert_id"]);
+$result = $client->Convert()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -135,7 +135,7 @@ Set the entity match criteria.
 Create a new `ConvertEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -152,12 +152,12 @@ $rate = $client->Rate();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `code` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | No |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `code` | `string` | Yes |  |
+| `date` | `string` | No |  |
+| `msg` | `string` | Yes |  |
+| `rate` | `array` | Yes |  |
+| `time_update` | `array` | Yes |  |
 
 ### Operations
 
@@ -166,24 +166,24 @@ $rate = $client->Rate();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Rate()->load(["id" => "rate_id"]);
+$result = $client->Rate()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -192,7 +192,7 @@ Set the entity match criteria.
 Create a new `RateEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

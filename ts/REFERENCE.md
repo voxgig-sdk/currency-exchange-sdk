@@ -129,10 +129,10 @@ const convert = client.Convert()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | ``$STRING`` | Yes |  |
-| `convert_result` | ``$OBJECT`` | Yes |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `code` | `string` | Yes |  |
+| `convert_result` | `Record<string, any>` | Yes |  |
+| `msg` | `string` | Yes |  |
+| `time_update` | `Record<string, any>` | Yes |  |
 
 ### Operations
 
@@ -141,7 +141,7 @@ const convert = client.Convert()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Convert().load({ id: 'convert_id' })
+const result = await client.Convert().load()
 ```
 
 ### Common Methods
@@ -182,12 +182,12 @@ const rate = client.Rate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | ``$STRING`` | Yes |  |
-| `code` | ``$STRING`` | Yes |  |
-| `date` | ``$STRING`` | No |  |
-| `msg` | ``$STRING`` | Yes |  |
-| `rate` | ``$OBJECT`` | Yes |  |
-| `time_update` | ``$OBJECT`` | Yes |  |
+| `base` | `string` | Yes |  |
+| `code` | `string` | Yes |  |
+| `date` | `string` | No |  |
+| `msg` | `string` | Yes |  |
+| `rate` | `Record<string, any>` | Yes |  |
+| `time_update` | `Record<string, any>` | Yes |  |
 
 ### Operations
 
@@ -196,7 +196,7 @@ const rate = client.Rate()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Rate().load({ id: 'rate_id' })
+const result = await client.Rate().load()
 ```
 
 ### Common Methods
