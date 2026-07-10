@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -402,15 +399,25 @@
           "url": "https://www.juheapi.com/api-catalog/exchange-rate"
         },
         "description": "Provides daily currency exchange rates and performs conversions between a wide range of global currencies and cryptos. This API allows applications to access real-time foreign exchange data, making it ideal for e-commerce platforms, financial tools, and budgeting apps.",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "query",
+          "name": "key",
+          "prefix": "",
+          "scheme": "ApiKeyAuth",
+          "type": "apiKey"
+        },
         "servers": [
           {
             "description": "Production server",
             "url": "https://hub.juheapi.com/exchangerate/v2"
           }
         ],
+        "summary": "Provides daily currency exchange rates and performs conversions between a wide range of global currencies and cryptos.",
         "termsOfService": "https://www.juheapi.com/terms-of-service",
         "title": "Currency Exchange API",
-        "version": "2.0.0"
+        "version": "2.0.0",
+        "website": "https://hub.juheapi.com"
       },
       "option": {},
       "target": {
@@ -463,6 +470,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -513,6 +523,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

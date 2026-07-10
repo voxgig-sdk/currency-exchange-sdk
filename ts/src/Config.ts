@@ -39,7 +39,7 @@ class Config {
     base: 'https://hub.juheapi.com/exchangerate/v2',
 
     auth: {
-      prefix: 'Bearer',
+      prefix: '',
     },
 
     headers: {

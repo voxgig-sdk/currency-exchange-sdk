@@ -16,7 +16,7 @@ module CurrencyExchangeConfig
       "options" => {
         "base" => "https://hub.juheapi.com/exchangerate/v2",
         "auth" => {
-          "prefix" => "Bearer",
+          "prefix" => "",
         },
         "headers" => {
           "content-type" => "application/json",

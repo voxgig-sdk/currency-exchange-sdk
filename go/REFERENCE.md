@@ -96,6 +96,7 @@ same parameters as `Direct()`.
 
 ```go
 convert := client.Convert(nil)
+fmt.Println(convert.GetName()) // "convert"
 ```
 
 ### Fields
@@ -115,6 +116,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Convert(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -145,6 +150,7 @@ Return the entity name.
 
 ```go
 rate := client.Rate(nil)
+fmt.Println(rate.GetName()) // "rate"
 ```
 
 ### Fields
@@ -166,6 +172,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Rate(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
