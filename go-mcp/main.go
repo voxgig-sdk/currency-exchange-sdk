@@ -37,7 +37,20 @@ func main() {
 	addr := flag.String("addr", ":8080", "listen address for http transport")
 	flag.Parse()
 
-	client := sdk.NewCurrencyExchangeSDK(nil)
+	// Configure from the environment: CURRENCY_EXCHANGE_APIKEY carries the API key and
+	// CURRENCY_EXCHANGE_BASE optionally overrides the API base URL (e.g. production).
+	// Both injectable by a secrets vault. Unset -> nil config defaults.
+	var opts map[string]any
+	if apikey := os.Getenv("CURRENCY_EXCHANGE_APIKEY"); apikey != "" {
+		opts = map[string]any{"apikey": apikey}
+	}
+	if base := os.Getenv("CURRENCY_EXCHANGE_BASE"); base != "" {
+		if opts == nil {
+			opts = map[string]any{}
+		}
+		opts["base"] = base
+	}
+	client := sdk.NewCurrencyExchangeSDK(opts)
 	server := mcp.NewServer(
 		&mcp.Implementation{
 			Name:    "currency-exchange",
