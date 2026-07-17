@@ -1,4 +1,4 @@
--- ProjectName SDK configuration
+-- CurrencyExchange SDK configuration
 
 local function make_config()
   return {

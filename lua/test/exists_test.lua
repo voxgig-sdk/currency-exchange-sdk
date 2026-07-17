@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- CurrencyExchange SDK exists test
 
 local sdk = require("currency-exchange_sdk")
 
