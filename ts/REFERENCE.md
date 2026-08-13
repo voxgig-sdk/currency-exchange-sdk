@@ -186,7 +186,7 @@ const rate = client.Rate()
 | `code` | `string` | Yes |  |
 | `date` | `string` | No |  |
 | `msg` | `string` | Yes |  |
-| `rate` | `Record<string, any>` | Yes |  |
+| `rates` | `Record<string, any>` | Yes |  |
 | `time_update` | `Record<string, any>` | Yes |  |
 
 ### Operations

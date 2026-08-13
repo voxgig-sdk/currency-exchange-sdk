@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'CurrencyExchange',
   }
 
 
@@ -137,6 +137,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/convert",
               "parts": [
@@ -196,7 +197,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "rate",
+          "name": "rates",
           "req": true,
           "type": "`$OBJECT`",
           "index$": 4
@@ -256,6 +257,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/rates",
               "parts": [

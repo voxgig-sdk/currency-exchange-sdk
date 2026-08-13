@@ -62,8 +62,8 @@ function makeCtrl(explain: boolean) {
 // Overrides configuration values with environment variables if available
 function envOverride(m: Record<string, any>) {
   if (
-    'TRUE' === process.env.CURRENCYEXCHANGE_TEST_LIVE ||
-    'TRUE' === process.env.CURRENCYEXCHANGE_TEST_OVERRIDE
+    'TRUE' === process.env.CURRENCY_EXCHANGE_TEST_LIVE ||
+    'TRUE' === process.env.CURRENCY_EXCHANGE_TEST_OVERRIDE
   ) {
     Object.entries(m).map(n => {
       let envval = process.env[n[0]]
@@ -74,7 +74,7 @@ function envOverride(m: Record<string, any>) {
     })
   }
 
-  m.CURRENCYEXCHANGE_TEST_EXPLAIN = process.env.CURRENCYEXCHANGE_TEST_EXPLAIN || m.CURRENCYEXCHANGE_TEST_EXPLAIN
+  m.CURRENCY_EXCHANGE_TEST_EXPLAIN = process.env.CURRENCY_EXCHANGE_TEST_EXPLAIN || m.CURRENCY_EXCHANGE_TEST_EXPLAIN
 
   return m
 }

@@ -156,7 +156,7 @@ $rate = $client->Rate();
 | `code` | `string` | Yes |  |
 | `date` | `string` | No |  |
 | `msg` | `string` | Yes |  |
-| `rate` | `array` | Yes |  |
+| `rates` | `array` | Yes |  |
 | `time_update` | `array` | Yes |  |
 
 ### Operations

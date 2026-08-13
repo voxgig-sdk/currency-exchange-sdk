@@ -37,7 +37,7 @@ class Rate
     public string $code;
     public ?string $date = null;
     public string $msg;
-    public array $rate;
+    public array $rates;
     public array $time_update;
 }
 
@@ -48,7 +48,7 @@ class RateLoadMatch
     public ?string $code = null;
     public ?string $date = null;
     public ?string $msg = null;
-    public ?array $rate = null;
+    public ?array $rates = null;
     public ?array $time_update = null;
 }
 

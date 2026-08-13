@@ -23,7 +23,7 @@
 ---@field code string
 ---@field date? string
 ---@field msg string
----@field rate table
+---@field rates table
 ---@field time_update table
 
 ---@class RateLoadMatch
@@ -31,7 +31,7 @@
 ---@field code? string
 ---@field date? string
 ---@field msg? string
----@field rate? table
+---@field rates? table
 ---@field time_update? table
 
 local M = {}

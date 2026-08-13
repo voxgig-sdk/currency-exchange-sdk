@@ -36,7 +36,7 @@ client = CurrencyExchangeSDK.new({
 
 ```ruby
 begin
-  # load returns the bare Convert record (raises on error).
+  # load returns the ENTITY — call data_get for the Convert record (raises on error).
   convert = client.Convert.load()
   puts convert
 rescue => err
@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = CurrencyExchangeSDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 convert = client.Convert.load()
 puts convert
 ```
@@ -256,7 +257,7 @@ API path: `/convert`
 | `code` |  |
 | `date` |  |
 | `msg` |  |
-| `rate` |  |
+| `rates` |  |
 | `time_update` |  |
 
 Operations: Load.
@@ -290,7 +291,7 @@ Create an instance: `convert = client.Convert`
 #### Example: Load
 
 ```ruby
-# load returns the bare Convert record (raises on error).
+# load returns the ENTITY — call data_get for the Convert record (raises on error).
 convert = client.Convert.load()
 ```
 
@@ -313,13 +314,13 @@ Create an instance: `rate = client.Rate`
 | `code` | `String` |  |
 | `date` | `String` |  |
 | `msg` | `String` |  |
-| `rate` | `Hash` |  |
+| `rates` | `Hash` |  |
 | `time_update` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Rate record (raises on error).
+# load returns the ENTITY — call data_get for the Rate record (raises on error).
 rate = client.Rate.load()
 ```
 

@@ -247,7 +247,7 @@ API path: `/convert`
 | `code` |  |
 | `date` |  |
 | `msg` |  |
-| `rate` |  |
+| `rates` |  |
 | `time_update` |  |
 
 Operations: Load.
@@ -303,7 +303,7 @@ Create an instance: `local rate = client:Rate(nil)`
 | `code` | `string` |  |
 | `date` | `string` |  |
 | `msg` | `string` |  |
-| `rate` | `table` |  |
+| `rates` | `table` |  |
 | `time_update` | `table` |  |
 
 #### Example: Load

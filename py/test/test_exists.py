@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# CurrencyExchange SDK exists test
 
 import pytest
 from currencyexchange_sdk import CurrencyExchangeSDK

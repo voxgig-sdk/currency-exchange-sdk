@@ -104,6 +104,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/convert",
                 ["parts"] = {
@@ -163,7 +164,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "rate",
+            ["name"] = "rates",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
             ["index$"] = 4,
@@ -223,6 +224,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/rates",
                 ["parts"] = {

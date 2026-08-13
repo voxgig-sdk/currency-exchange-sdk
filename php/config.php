@@ -110,6 +110,7 @@ class CurrencyExchangeConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/convert',
                   'parts' => [
@@ -169,7 +170,7 @@ class CurrencyExchangeConfig
             ],
             [
               'active' => true,
-              'name' => 'rate',
+              'name' => 'rates',
               'req' => true,
               'type' => '`$OBJECT`',
               'index$' => 4,
@@ -229,6 +230,7 @@ class CurrencyExchangeConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/rates',
                   'parts' => [

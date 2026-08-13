@@ -281,7 +281,7 @@ API path: `/convert`
 | `"code"` |  |
 | `"date"` |  |
 | `"msg"` |  |
-| `"rate"` |  |
+| `"rates"` |  |
 | `"time_update"` |  |
 
 Operations: Load.
@@ -341,7 +341,7 @@ Create an instance: `rate := client.Rate(nil)`
 | `code` | `string` |  |
 | `date` | `string` |  |
 | `msg` | `string` |  |
-| `rate` | `map[string]any` |  |
+| `rates` | `map[string]any` |  |
 | `time_update` | `map[string]any` |  |
 
 #### Example: Load

@@ -157,7 +157,7 @@ rate = client.Rate
 | `code` | `String` | Yes |  |
 | `date` | `String` | No |  |
 | `msg` | `String` | Yes |  |
-| `rate` | `Hash` | Yes |  |
+| `rates` | `Hash` | Yes |  |
 | `time_update` | `Hash` | Yes |  |
 
 ### Operations

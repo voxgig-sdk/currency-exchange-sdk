@@ -154,7 +154,7 @@ local rate = client:Rate(nil)
 | `code` | `string` | Yes |  |
 | `date` | `string` | No |  |
 | `msg` | `string` | Yes |  |
-| `rate` | `table` | Yes |  |
+| `rates` | `table` | Yes |  |
 | `time_update` | `table` | Yes |  |
 
 ### Operations

@@ -161,7 +161,7 @@ fmt.Println(rate.GetName()) // "rate"
 | `code` | `string` | Yes |  |
 | `date` | `string` | No |  |
 | `msg` | `string` | Yes |  |
-| `rate` | `map[string]any` | Yes |  |
+| `rates` | `map[string]any` | Yes |  |
 | `time_update` | `map[string]any` | Yes |  |
 
 ### Operations

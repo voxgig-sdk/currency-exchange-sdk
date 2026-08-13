@@ -37,7 +37,7 @@ $client = new CurrencyExchangeSDK([
 
 ```php
 try {
-    // load() returns the bare Convert record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Convert record (throws on error).
     $convert = $client->Convert()->load();
     print_r($convert);
 } catch (\Throwable $err) {
@@ -125,7 +125,8 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = CurrencyExchangeSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $convert = $client->Convert()->load();
 print_r($convert);
 ```
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -266,7 +267,7 @@ API path: `/convert`
 | `code` |  |
 | `date` |  |
 | `msg` |  |
-| `rate` |  |
+| `rates` |  |
 | `time_update` |  |
 
 Operations: Load.
@@ -300,7 +301,7 @@ Create an instance: `$convert = $client->Convert();`
 #### Example: Load
 
 ```php
-// load() returns the bare Convert record (throws on error).
+// load() returns the ENTITY — call data_get() for the Convert record (throws on error).
 $convert = $client->Convert()->load();
 ```
 
@@ -323,13 +324,13 @@ Create an instance: `$rate = $client->Rate();`
 | `code` | `string` |  |
 | `date` | `string` |  |
 | `msg` | `string` |  |
-| `rate` | `array` |  |
+| `rates` | `array` |  |
 | `time_update` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Rate record (throws on error).
+// load() returns the ENTITY — call data_get() for the Rate record (throws on error).
 $rate = $client->Rate()->load();
 ```
 

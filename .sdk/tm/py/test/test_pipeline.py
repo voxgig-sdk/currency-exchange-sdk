@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import CurrencyExchangeSDK
-from core.error import CurrencyExchangeError
-from core.result import CurrencyExchangeResult
-from core.response import CurrencyExchangeResponse
-from core.spec import CurrencyExchangeSpec
-from feature.base_feature import CurrencyExchangeBaseFeature
+from projectname_sdk.core.error import CurrencyExchangeError
+from projectname_sdk.core.result import CurrencyExchangeResult
+from projectname_sdk.core.response import CurrencyExchangeResponse
+from projectname_sdk.core.spec import CurrencyExchangeSpec
+from projectname_sdk.feature.base_feature import CurrencyExchangeBaseFeature
 
 
 def _client():

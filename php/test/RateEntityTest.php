@@ -33,7 +33,7 @@ class RateEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set CURRENCYEXCHANGE_TEST_RATE_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set CURRENCY_EXCHANGE_TEST_RATE_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -77,39 +77,39 @@ function rate_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("CURRENCYEXCHANGE_TEST_RATE_ENTID");
+    $entid_env_raw = getenv("CURRENCY_EXCHANGE_TEST_RATE_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "CURRENCYEXCHANGE_TEST_RATE_ENTID" => $idmap,
-        "CURRENCYEXCHANGE_TEST_LIVE" => "FALSE",
-        "CURRENCYEXCHANGE_TEST_EXPLAIN" => "FALSE",
-        "CURRENCYEXCHANGE_APIKEY" => "NONE",
+        "CURRENCY_EXCHANGE_TEST_RATE_ENTID" => $idmap,
+        "CURRENCY_EXCHANGE_TEST_LIVE" => "FALSE",
+        "CURRENCY_EXCHANGE_TEST_EXPLAIN" => "FALSE",
+        "CURRENCY_EXCHANGE_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["CURRENCYEXCHANGE_TEST_RATE_ENTID"]);
+        $env["CURRENCY_EXCHANGE_TEST_RATE_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["CURRENCYEXCHANGE_TEST_LIVE"] === "TRUE") {
+    if ($env["CURRENCY_EXCHANGE_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["CURRENCYEXCHANGE_APIKEY"],
+                "apikey" => $env["CURRENCY_EXCHANGE_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new CurrencyExchangeSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["CURRENCYEXCHANGE_TEST_LIVE"] === "TRUE";
+    $live = $env["CURRENCY_EXCHANGE_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["CURRENCYEXCHANGE_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["CURRENCY_EXCHANGE_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

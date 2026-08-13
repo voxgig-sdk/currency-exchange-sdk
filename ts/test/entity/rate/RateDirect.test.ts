@@ -19,11 +19,15 @@ import {
 describe('RateDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when CURRENCYEXCHANGE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('CURRENCYEXCHANGE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when CURRENCY_EXCHANGE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('CURRENCY_EXCHANGE_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new CurrencyExchangeSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -76,19 +80,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'CURRENCYEXCHANGE_TEST_RATE_ENTID': {},
-    'CURRENCYEXCHANGE_TEST_LIVE': 'FALSE',
-    'CURRENCYEXCHANGE_APIKEY': 'NONE',
+    'CURRENCY_EXCHANGE_TEST_RATE_ENTID': {},
+    'CURRENCY_EXCHANGE_TEST_LIVE': 'FALSE',
+    'CURRENCY_EXCHANGE_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.CURRENCYEXCHANGE_TEST_LIVE
+  const live = 'TRUE' === env.CURRENCY_EXCHANGE_TEST_LIVE
 
   if (live) {
     const client = new CurrencyExchangeSDK({
-      apikey: env.CURRENCYEXCHANGE_APIKEY,
+      apikey: env.CURRENCY_EXCHANGE_APIKEY,
     })
 
-    let idmap: any = env['CURRENCYEXCHANGE_TEST_RATE_ENTID']
+    let idmap: any = env['CURRENCY_EXCHANGE_TEST_RATE_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

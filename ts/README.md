@@ -123,7 +123,8 @@ Create a mock client for unit testing — no server required:
 const client = CurrencyExchangeSDK.test()
 
 const convert = await client.Convert().load()
-// convert is a bare entity populated with mock response data
+// convert is the entity, populated with mock response data
+// — call convert.data() for the record itself
 console.log(convert)
 ```
 
@@ -308,7 +309,7 @@ API path: `/convert`
 | `code` |  |
 | `date` |  |
 | `msg` |  |
-| `rate` |  |
+| `rates` |  |
 | `time_update` |  |
 
 Operations: load.
@@ -364,7 +365,7 @@ Create an instance: `const rate = client.Rate()`
 | `code` | `string` |  |
 | `date` | `string` |  |
 | `msg` | `string` |  |
-| `rate` | `Record<string, any>` |  |
+| `rates` | `Record<string, any>` |  |
 | `time_update` | `Record<string, any>` |  |
 
 #### Example: Load

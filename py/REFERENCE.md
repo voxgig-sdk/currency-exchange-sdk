@@ -150,7 +150,7 @@ rate = client.Rate()
 | `code` | `str` | Yes |  |
 | `date` | `str` | No |  |
 | `msg` | `str` | Yes |  |
-| `rate` | `dict` | Yes |  |
+| `rates` | `dict` | Yes |  |
 | `time_update` | `dict` | Yes |  |
 
 ### Operations

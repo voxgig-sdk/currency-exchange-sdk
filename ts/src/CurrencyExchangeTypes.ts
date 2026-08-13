@@ -24,7 +24,7 @@ export interface Rate {
   code: string
   date?: string
   msg: string
-  rate: Record<string, any>
+  rates: Record<string, any>
   time_update: Record<string, any>
 }
 
@@ -33,7 +33,7 @@ export interface RateLoadMatch {
   code?: string
   date?: string
   msg?: string
-  rate?: Record<string, any>
+  rates?: Record<string, any>
   time_update?: Record<string, any>
 }
 

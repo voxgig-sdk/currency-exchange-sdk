@@ -64,7 +64,7 @@ ConvertLoadMatch = Struct.new(
 # @!attribute [rw] msg
 #   @return [String]
 #
-# @!attribute [rw] rate
+# @!attribute [rw] rates
 #   @return [Hash]
 #
 # @!attribute [rw] time_update
@@ -74,7 +74,7 @@ Rate = Struct.new(
   :code,
   :date,
   :msg,
-  :rate,
+  :rates,
   :time_update,
   keyword_init: true
 )
@@ -93,7 +93,7 @@ Rate = Struct.new(
 # @!attribute [rw] msg
 #   @return [String, nil]
 #
-# @!attribute [rw] rate
+# @!attribute [rw] rates
 #   @return [Hash, nil]
 #
 # @!attribute [rw] time_update
@@ -103,7 +103,7 @@ RateLoadMatch = Struct.new(
   :code,
   :date,
   :msg,
-  :rate,
+  :rates,
   :time_update,
   keyword_init: true
 )

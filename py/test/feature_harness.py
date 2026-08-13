@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import CurrencyExchangeControl
-from core.error import CurrencyExchangeError
-from core.result import CurrencyExchangeResult
-from core.spec import CurrencyExchangeSpec
+from currencyexchange_sdk.config import make_config
+from currencyexchange_sdk.features import _make_feature
+from currencyexchange_sdk.core.control import CurrencyExchangeControl
+from currencyexchange_sdk.core.error import CurrencyExchangeError
+from currencyexchange_sdk.core.result import CurrencyExchangeResult
+from currencyexchange_sdk.core.spec import CurrencyExchangeSpec
 
 
 # True when this SDK was generated with the named feature.

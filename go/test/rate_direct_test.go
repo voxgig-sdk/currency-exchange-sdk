@@ -41,7 +41,8 @@ func TestRateDirect(t *testing.T) {
 		if setup.live {
 			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
 			// rather than fail when the load endpoint isn't reachable with
-			// the IDs we can construct from setup.idmap.
+			// the IDs we can construct from setup.idmap — unless the model
+			// sets main.kit.test.live.strict.
 			if err != nil {
 				t.Skipf("load call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -103,21 +104,21 @@ func rateDirectSetup(mockres any) *rateDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"CURRENCYEXCHANGE_TEST_RATE_ENTID": map[string]any{},
-		"CURRENCYEXCHANGE_TEST_LIVE":    "FALSE",
-		"CURRENCYEXCHANGE_APIKEY":       "NONE",
+		"CURRENCY_EXCHANGE_TEST_RATE_ENTID": map[string]any{},
+		"CURRENCY_EXCHANGE_TEST_LIVE":    "FALSE",
+		"CURRENCY_EXCHANGE_APIKEY":       "NONE",
 	})
 
-	live := env["CURRENCYEXCHANGE_TEST_LIVE"] == "TRUE"
+	live := env["CURRENCY_EXCHANGE_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["CURRENCYEXCHANGE_APIKEY"],
+			"apikey": env["CURRENCY_EXCHANGE_APIKEY"],
 		}
 		client := sdk.NewCurrencyExchangeSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["CURRENCYEXCHANGE_TEST_RATE_ENTID"]; ok {
+		if entidRaw, ok := env["CURRENCY_EXCHANGE_TEST_RATE_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

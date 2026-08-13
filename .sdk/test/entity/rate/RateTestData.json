@@ -6,7 +6,7 @@
         "code": "s3d",
         "date": "s3e",
         "msg": "s3f",
-        "rate": {},
+        "rates": {},
         "time_update": {},
         "id": "RATE00"
       },
@@ -15,7 +15,7 @@
         "code": "s79",
         "date": "s7a",
         "msg": "s7b",
-        "rate": {},
+        "rates": {},
         "time_update": {},
         "id": "RATE01"
       },
@@ -24,7 +24,7 @@
         "code": "sb5",
         "date": "sb6",
         "msg": "sb7",
-        "rate": {},
+        "rates": {},
         "time_update": {},
         "id": "RATE02"
       }
@@ -37,7 +37,7 @@
         "code": "sf1",
         "date": "sf2",
         "msg": "sf3",
-        "rate": {},
+        "rates": {},
         "time_update": {}
       }
     }

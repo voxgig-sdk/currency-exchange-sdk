@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ CurrencyExchangeUtility.registrar = ->(u) {
   u.prepare_params = CurrencyExchangeUtilities::PrepareParams
   u.prepare_path = CurrencyExchangeUtilities::PreparePath
   u.prepare_query = CurrencyExchangeUtilities::PrepareQuery
+  u.graphql_body = CurrencyExchangeUtilities::GraphqlBody
+  u.graphql_errors = CurrencyExchangeUtilities::GraphqlErrors
   u.result_basic = CurrencyExchangeUtilities::ResultBasic
   u.result_body = CurrencyExchangeUtilities::ResultBody
   u.result_headers = CurrencyExchangeUtilities::ResultHeaders

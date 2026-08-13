@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 import json
 
-from utility.voxgig_struct import voxgig_struct as vs
+from currencyexchange_sdk.utility.voxgig_struct import voxgig_struct as vs
 
 
 class CurrencyExchangeTestRunner:
@@ -38,8 +38,8 @@ class CurrencyExchangeTestRunner:
 
     @staticmethod
     def env_override(m):
-        live = CurrencyExchangeTestRunner.getenv("CURRENCYEXCHANGE_TEST_LIVE")
-        override = CurrencyExchangeTestRunner.getenv("CURRENCYEXCHANGE_TEST_OVERRIDE")
+        live = CurrencyExchangeTestRunner.getenv("CURRENCY_EXCHANGE_TEST_LIVE")
+        override = CurrencyExchangeTestRunner.getenv("CURRENCY_EXCHANGE_TEST_OVERRIDE")
 
         if live == "TRUE" or override == "TRUE":
             for key in list(m.keys()):
@@ -56,9 +56,9 @@ class CurrencyExchangeTestRunner:
                             pass
                     m[key] = envval
 
-        explain = CurrencyExchangeTestRunner.getenv("CURRENCYEXCHANGE_TEST_EXPLAIN")
+        explain = CurrencyExchangeTestRunner.getenv("CURRENCY_EXCHANGE_TEST_EXPLAIN")
         if explain is not None and explain != "":
-            m["CURRENCYEXCHANGE_TEST_EXPLAIN"] = explain
+            m["CURRENCY_EXCHANGE_TEST_EXPLAIN"] = explain
 
         return m
 
@@ -111,6 +111,17 @@ class CurrencyExchangeTestRunner:
         return 500
 
     @staticmethod
+    def entity_data(v):
+        """Extract the data map from an op result.
+
+        Every entity operation resolves to the ENTITY (see AGENTS.md), so a
+        flow test that wants the record takes this hop. A plain dict passes
+        through unchanged.
+        """
+        if hasattr(v, "data_get") and callable(v.data_get):
+            return v.data_get()
+        return v
+
     def entity_list_to_data(lst):
         out = []
         for item in lst:
@@ -132,6 +143,10 @@ def load_env_local():
 
 def env_override(m):
     return CurrencyExchangeTestRunner.env_override(m)
+
+
+def entity_data(v):
+    return CurrencyExchangeTestRunner.entity_data(v)
 
 
 def entity_list_to_data(lst):

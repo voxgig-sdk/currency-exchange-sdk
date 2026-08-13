@@ -26,8 +26,8 @@ import {
 describe('RateEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when CURRENCYEXCHANGE_TEST_LIVE=TRUE.
-  afterEach(liveDelay('CURRENCYEXCHANGE_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when CURRENCY_EXCHANGE_TEST_LIVE=TRUE.
+  afterEach(liveDelay('CURRENCY_EXCHANGE_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = CurrencyExchangeSDK.test()
@@ -62,7 +62,7 @@ describe('RateEntity', async () => {
     // LOAD
     const rate_ref01_ent = client.Rate()
     const rate_ref01_match_dt0: any = {}
-    const rate_ref01_data_dt0 = await rate_ref01_ent.load(rate_ref01_match_dt0)
+    const rate_ref01_data_dt0 = (await rate_ref01_ent.load(rate_ref01_match_dt0)).data()
     assert(null != rate_ref01_data_dt0)
 
 

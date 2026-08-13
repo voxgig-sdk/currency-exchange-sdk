@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from currencyexchange_sdk.utility.voxgig_struct import voxgig_struct as vs
 from currencyexchange_sdk import CurrencyExchangeSDK
-from core import helpers
+from currencyexchange_sdk.core import helpers
 from test import runner
 
 
@@ -61,16 +61,16 @@ def _rate_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "CURRENCYEXCHANGE_TEST_RATE_ENTID": {},
-        "CURRENCYEXCHANGE_TEST_LIVE": "FALSE",
-        "CURRENCYEXCHANGE_APIKEY": "NONE",
+        "CURRENCY_EXCHANGE_TEST_RATE_ENTID": {},
+        "CURRENCY_EXCHANGE_TEST_LIVE": "FALSE",
+        "CURRENCY_EXCHANGE_APIKEY": "NONE",
     })
 
-    live = env.get("CURRENCYEXCHANGE_TEST_LIVE") == "TRUE"
+    live = env.get("CURRENCY_EXCHANGE_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("CURRENCYEXCHANGE_APIKEY"),
+            "apikey": env.get("CURRENCY_EXCHANGE_APIKEY"),
         }
         client = CurrencyExchangeSDK(merged_opts)
         return {
