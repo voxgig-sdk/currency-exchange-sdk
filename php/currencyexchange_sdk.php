@@ -40,7 +40,7 @@ class CurrencyExchangeSDK
         $utility = new CurrencyExchangeUtility();
         $this->_utility = $utility;
 
-        $config = CurrencyExchangeConfig::make_config();
+        $config = CurrencyExchangeConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

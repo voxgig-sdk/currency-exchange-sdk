@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class CurrencyExchangeConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -35,32 +58,24 @@ class CurrencyExchangeConfig
         'convert' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'code',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'convert_result',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'msg',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'time_update',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 3,
             ],
           ],
           'name' => 'convert',
@@ -70,20 +85,16 @@ class CurrencyExchangeConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 100,
                         'kind' => 'query',
                         'name' => 'amount',
                         'orig' => 'amount',
-                        'reqd' => false,
                         'type' => '`$NUMBER`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'USD',
                         'kind' => 'query',
                         'name' => 'from',
@@ -92,7 +103,6 @@ class CurrencyExchangeConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'key',
                         'orig' => 'key',
@@ -100,7 +110,6 @@ class CurrencyExchangeConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'CNY',
                         'kind' => 'query',
                         'name' => 'to',
@@ -128,10 +137,8 @@ class CurrencyExchangeConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [
@@ -141,46 +148,33 @@ class CurrencyExchangeConfig
         'rate' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'base',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'code',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'date',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 2,
             ],
             [
-              'active' => true,
               'name' => 'msg',
               'req' => true,
               'type' => '`$STRING`',
-              'index$' => 3,
             ],
             [
-              'active' => true,
               'name' => 'rates',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 4,
             ],
             [
-              'active' => true,
               'name' => 'time_update',
               'req' => true,
               'type' => '`$OBJECT`',
-              'index$' => 5,
             ],
           ],
           'name' => 'rate',
@@ -190,11 +184,9 @@ class CurrencyExchangeConfig
               'name' => 'load',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 'USD',
                         'kind' => 'query',
                         'name' => 'base',
@@ -203,16 +195,13 @@ class CurrencyExchangeConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => '2025-06-26',
                         'kind' => 'query',
                         'name' => 'date',
                         'orig' => 'date',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'kind' => 'query',
                         'name' => 'key',
                         'orig' => 'key',
@@ -220,12 +209,10 @@ class CurrencyExchangeConfig
                         'type' => '`$STRING`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'CNY,EUR,GBP',
                         'kind' => 'query',
                         'name' => 'symbol',
                         'orig' => 'symbol',
-                        'reqd' => false,
                         'type' => '`$STRING`',
                       ],
                     ],
@@ -248,10 +235,8 @@ class CurrencyExchangeConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'load',
             ],
           ],
           'relations' => [

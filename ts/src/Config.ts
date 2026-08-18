@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://hub.juheapi.com/exchangerate/v2',
+    base: "https://hub.juheapi.com/exchangerate/v2",
 
     auth: {
       prefix: '',
@@ -62,32 +62,24 @@ class Config {
     "convert": {
       "fields": [
         {
-          "active": true,
           "name": "code",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "convert_result",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "msg",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "time_update",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 3
+          "type": "`$OBJECT`"
         }
       ],
       "name": "convert",
@@ -97,20 +89,16 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": 100,
                     "kind": "query",
                     "name": "amount",
                     "orig": "amount",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "example": "USD",
                     "kind": "query",
                     "name": "from",
@@ -119,7 +107,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "key",
                     "orig": "key",
@@ -127,7 +114,6 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "CNY",
                     "kind": "query",
                     "name": "to",
@@ -154,11 +140,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -168,46 +152,33 @@ class Config {
     "rate": {
       "fields": [
         {
-          "active": true,
           "name": "base",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "code",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "date",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "msg",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 3
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "rates",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 4
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "time_update",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 5
+          "type": "`$OBJECT`"
         }
       ],
       "name": "rate",
@@ -217,11 +188,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "USD",
                     "kind": "query",
                     "name": "base",
@@ -230,16 +199,13 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "2025-06-26",
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "key",
                     "orig": "key",
@@ -247,12 +213,10 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "CNY,EUR,GBP",
                     "kind": "query",
                     "name": "symbol",
                     "orig": "symbol",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -274,11 +238,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

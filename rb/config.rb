@@ -1,6 +1,20 @@
 # CurrencyExchange SDK configuration
 
 module CurrencyExchangeConfig
+  # Return the process-wide config, built once on first use. The SDK reads
+  # the config on every request and never writes to it, so one instance is
+  # shared by every client rather than rebuilt per client.
+  #
+  # The returned hash is shared: treat it as read-only. Callers that need to
+  # mutate should use make_config, which always returns a fresh copy.
+  def self.shared_config
+    @shared_config ||= make_config
+  end
+
+
+  # Build a fresh, fully materialised config hash. Every call rebuilds the
+  # whole structure, so prefer shared_config unless you need a private copy
+  # you intend to mutate.
   def self.make_config
     {
       "main" => {
@@ -30,32 +44,24 @@ module CurrencyExchangeConfig
         "convert" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "code",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "convert_result",
               "req" => true,
               "type" => "`$OBJECT`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "msg",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "time_update",
               "req" => true,
               "type" => "`$OBJECT`",
-              "index$" => 3,
             },
           ],
           "name" => "convert",
@@ -65,20 +71,16 @@ module CurrencyExchangeConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => 100,
                         "kind" => "query",
                         "name" => "amount",
                         "orig" => "amount",
-                        "reqd" => false,
                         "type" => "`$NUMBER`",
                       },
                       {
-                        "active" => true,
                         "example" => "USD",
                         "kind" => "query",
                         "name" => "from",
@@ -87,7 +89,6 @@ module CurrencyExchangeConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "key",
                         "orig" => "key",
@@ -95,7 +96,6 @@ module CurrencyExchangeConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "example" => "CNY",
                         "kind" => "query",
                         "name" => "to",
@@ -123,10 +123,8 @@ module CurrencyExchangeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {
@@ -136,46 +134,33 @@ module CurrencyExchangeConfig
         "rate" => {
           "fields" => [
             {
-              "active" => true,
               "name" => "base",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 0,
             },
             {
-              "active" => true,
               "name" => "code",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 1,
             },
             {
-              "active" => true,
               "name" => "date",
-              "req" => false,
               "type" => "`$STRING`",
-              "index$" => 2,
             },
             {
-              "active" => true,
               "name" => "msg",
               "req" => true,
               "type" => "`$STRING`",
-              "index$" => 3,
             },
             {
-              "active" => true,
               "name" => "rates",
               "req" => true,
               "type" => "`$OBJECT`",
-              "index$" => 4,
             },
             {
-              "active" => true,
               "name" => "time_update",
               "req" => true,
               "type" => "`$OBJECT`",
-              "index$" => 5,
             },
           ],
           "name" => "rate",
@@ -185,11 +170,9 @@ module CurrencyExchangeConfig
               "name" => "load",
               "points" => [
                 {
-                  "active" => true,
                   "args" => {
                     "query" => [
                       {
-                        "active" => true,
                         "example" => "USD",
                         "kind" => "query",
                         "name" => "base",
@@ -198,16 +181,13 @@ module CurrencyExchangeConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "example" => "2025-06-26",
                         "kind" => "query",
                         "name" => "date",
                         "orig" => "date",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "kind" => "query",
                         "name" => "key",
                         "orig" => "key",
@@ -215,12 +195,10 @@ module CurrencyExchangeConfig
                         "type" => "`$STRING`",
                       },
                       {
-                        "active" => true,
                         "example" => "CNY,EUR,GBP",
                         "kind" => "query",
                         "name" => "symbol",
                         "orig" => "symbol",
-                        "reqd" => false,
                         "type" => "`$STRING`",
                       },
                     ],
@@ -243,10 +221,8 @@ module CurrencyExchangeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "index$" => 0,
                 },
               ],
-              "key$" => "load",
             },
           },
           "relations" => {

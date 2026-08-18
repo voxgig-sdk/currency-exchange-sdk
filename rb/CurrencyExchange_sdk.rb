@@ -28,7 +28,7 @@ class CurrencyExchangeSDK
     utility = CurrencyExchangeUtility.new
     @_utility = utility
 
-    config = CurrencyExchangeConfig.make_config
+    config = CurrencyExchangeConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
