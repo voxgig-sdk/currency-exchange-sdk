@@ -240,9 +240,9 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
+| `code` | Response code (0 indicates success) |
 | `convert_result` |  |
-| `msg` |  |
+| `msg` | Response message |
 | `time_update` |  |
 
 Operations: Load.
@@ -253,11 +253,11 @@ API path: `/convert`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `code` |  |
-| `date` |  |
-| `msg` |  |
-| `rates` |  |
+| `base` | Base currency code |
+| `code` | Response code (0 indicates success) |
+| `date` | Date of the exchange rates |
+| `msg` | Response message |
+| `rates` | Map of currency codes to exchange rates |
 | `time_update` |  |
 
 Operations: Load.
@@ -283,9 +283,9 @@ Create an instance: `convert = client.Convert`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `String` |  |
+| `code` | `String` | Response code (0 indicates success) |
 | `convert_result` | `Hash` |  |
-| `msg` | `String` |  |
+| `msg` | `String` | Response message |
 | `time_update` | `Hash` |  |
 
 #### Example: Load
@@ -310,11 +310,11 @@ Create an instance: `rate = client.Rate`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `String` |  |
-| `code` | `String` |  |
-| `date` | `String` |  |
-| `msg` | `String` |  |
-| `rates` | `Hash` |  |
+| `base` | `String` | Base currency code |
+| `code` | `String` | Response code (0 indicates success) |
+| `date` | `String` | Date of the exchange rates |
+| `msg` | `String` | Response message |
+| `rates` | `Hash` | Map of currency codes to exchange rates |
 | `time_update` | `Hash` |  |
 
 #### Example: Load

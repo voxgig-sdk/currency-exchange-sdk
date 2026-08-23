@@ -19,6 +19,9 @@ module CurrencyExchangeConfig
     {
       "main" => {
         "name" => "CurrencyExchange",
+        "slug" => "currency-exchange",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -46,6 +49,7 @@ module CurrencyExchangeConfig
             {
               "name" => "code",
               "req" => true,
+              "short" => "Response code (0 indicates success)",
               "type" => "`$STRING`",
             },
             {
@@ -56,6 +60,7 @@ module CurrencyExchangeConfig
             {
               "name" => "msg",
               "req" => true,
+              "short" => "Response message",
               "type" => "`$STRING`",
             },
             {
@@ -136,25 +141,30 @@ module CurrencyExchangeConfig
             {
               "name" => "base",
               "req" => true,
+              "short" => "Base currency code",
               "type" => "`$STRING`",
             },
             {
               "name" => "code",
               "req" => true,
+              "short" => "Response code (0 indicates success)",
               "type" => "`$STRING`",
             },
             {
               "name" => "date",
+              "short" => "Date of the exchange rates",
               "type" => "`$STRING`",
             },
             {
               "name" => "msg",
               "req" => true,
+              "short" => "Response message",
               "type" => "`$STRING`",
             },
             {
               "name" => "rates",
               "req" => true,
+              "short" => "Map of currency codes to exchange rates",
               "type" => "`$OBJECT`",
             },
             {

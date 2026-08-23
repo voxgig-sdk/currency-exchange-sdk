@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "CurrencyExchange",
+      slug = "currency-exchange",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -34,6 +37,7 @@ local function make_config()
           {
             ["name"] = "code",
             ["req"] = true,
+            ["short"] = "Response code (0 indicates success)",
             ["type"] = "`$STRING`",
           },
           {
@@ -44,6 +48,7 @@ local function make_config()
           {
             ["name"] = "msg",
             ["req"] = true,
+            ["short"] = "Response message",
             ["type"] = "`$STRING`",
           },
           {
@@ -124,25 +129,30 @@ local function make_config()
           {
             ["name"] = "base",
             ["req"] = true,
+            ["short"] = "Base currency code",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "code",
             ["req"] = true,
+            ["short"] = "Response code (0 indicates success)",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "date",
+            ["short"] = "Date of the exchange rates",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "msg",
             ["req"] = true,
+            ["short"] = "Response message",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "rates",
             ["req"] = true,
+            ["short"] = "Map of currency codes to exchange rates",
             ["type"] = "`$OBJECT`",
           },
           {

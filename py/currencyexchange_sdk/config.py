@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "CurrencyExchange",
+            "slug": "currency-exchange",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -55,6 +58,7 @@ def make_config():
           {
             "name": "code",
             "req": True,
+            "short": "Response code (0 indicates success)",
             "type": "`$STRING`",
           },
           {
@@ -65,6 +69,7 @@ def make_config():
           {
             "name": "msg",
             "req": True,
+            "short": "Response message",
             "type": "`$STRING`",
           },
           {
@@ -145,25 +150,30 @@ def make_config():
           {
             "name": "base",
             "req": True,
+            "short": "Base currency code",
             "type": "`$STRING`",
           },
           {
             "name": "code",
             "req": True,
+            "short": "Response code (0 indicates success)",
             "type": "`$STRING`",
           },
           {
             "name": "date",
+            "short": "Date of the exchange rates",
             "type": "`$STRING`",
           },
           {
             "name": "msg",
             "req": True,
+            "short": "Response message",
             "type": "`$STRING`",
           },
           {
             "name": "rates",
             "req": True,
+            "short": "Map of currency codes to exchange rates",
             "type": "`$OBJECT`",
           },
           {

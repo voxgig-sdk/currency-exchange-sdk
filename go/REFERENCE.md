@@ -103,9 +103,9 @@ fmt.Println(convert.GetName()) // "convert"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `string` | Yes |  |
+| `code` | `string` | Yes | Response code (0 indicates success) |
 | `convert_result` | `map[string]any` | Yes |  |
-| `msg` | `string` | Yes |  |
+| `msg` | `string` | Yes | Response message |
 | `time_update` | `map[string]any` | Yes |  |
 
 ### Operations
@@ -157,11 +157,11 @@ fmt.Println(rate.GetName()) // "rate"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `code` | `string` | Yes |  |
-| `date` | `string` | No |  |
-| `msg` | `string` | Yes |  |
-| `rates` | `map[string]any` | Yes |  |
+| `base` | `string` | Yes | Base currency code |
+| `code` | `string` | Yes | Response code (0 indicates success) |
+| `date` | `string` | No | Date of the exchange rates |
+| `msg` | `string` | Yes | Response message |
+| `rates` | `map[string]any` | Yes | Map of currency codes to exchange rates |
 | `time_update` | `map[string]any` | Yes |  |
 
 ### Operations

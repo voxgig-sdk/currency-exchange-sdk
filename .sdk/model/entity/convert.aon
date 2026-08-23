@@ -8,6 +8,7 @@ main: kit: entity: convert: {
     {
       name: "code"
       req: true
+      short: "Response code (0 indicates success)"
       type: "`$STRING`"
     }
     {
@@ -18,6 +19,7 @@ main: kit: entity: convert: {
     {
       name: "msg"
       req: true
+      short: "Response message"
       type: "`$STRING`"
     }
     {

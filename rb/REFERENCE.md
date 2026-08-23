@@ -98,9 +98,9 @@ convert = client.Convert
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `String` | Yes |  |
+| `code` | `String` | Yes | Response code (0 indicates success) |
 | `convert_result` | `Hash` | Yes |  |
-| `msg` | `String` | Yes |  |
+| `msg` | `String` | Yes | Response message |
 | `time_update` | `Hash` | Yes |  |
 
 ### Operations
@@ -153,11 +153,11 @@ rate = client.Rate
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `String` | Yes |  |
-| `code` | `String` | Yes |  |
-| `date` | `String` | No |  |
-| `msg` | `String` | Yes |  |
-| `rates` | `Hash` | Yes |  |
+| `base` | `String` | Yes | Base currency code |
+| `code` | `String` | Yes | Response code (0 indicates success) |
+| `date` | `String` | No | Date of the exchange rates |
+| `msg` | `String` | Yes | Response message |
+| `rates` | `Hash` | Yes | Map of currency codes to exchange rates |
 | `time_update` | `Hash` | Yes |  |
 
 ### Operations

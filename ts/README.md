@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -292,9 +292,9 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
+| `code` | Response code (0 indicates success) |
 | `convert_result` |  |
-| `msg` |  |
+| `msg` | Response message |
 | `time_update` |  |
 
 Operations: load.
@@ -305,11 +305,11 @@ API path: `/convert`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `code` |  |
-| `date` |  |
-| `msg` |  |
-| `rates` |  |
+| `base` | Base currency code |
+| `code` | Response code (0 indicates success) |
+| `date` | Date of the exchange rates |
+| `msg` | Response message |
+| `rates` | Map of currency codes to exchange rates |
 | `time_update` |  |
 
 Operations: load.
@@ -335,9 +335,9 @@ Create an instance: `const convert = client.Convert()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
+| `code` | `string` | Response code (0 indicates success) |
 | `convert_result` | `Record<string, any>` |  |
-| `msg` | `string` |  |
+| `msg` | `string` | Response message |
 | `time_update` | `Record<string, any>` |  |
 
 #### Example: Load
@@ -361,11 +361,11 @@ Create an instance: `const rate = client.Rate()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `code` | `string` |  |
-| `date` | `string` |  |
-| `msg` | `string` |  |
-| `rates` | `Record<string, any>` |  |
+| `base` | `string` | Base currency code |
+| `code` | `string` | Response code (0 indicates success) |
+| `date` | `string` | Date of the exchange rates |
+| `msg` | `string` | Response message |
+| `rates` | `Record<string, any>` | Map of currency codes to exchange rates |
 | `time_update` | `Record<string, any>` |  |
 
 #### Example: Load

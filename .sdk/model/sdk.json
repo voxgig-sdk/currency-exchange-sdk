@@ -36,6 +36,7 @@
               "active": true,
               "name": "code",
               "req": true,
+              "short": "Response code (0 indicates success)",
               "type": "`$STRING`"
             },
             {
@@ -48,6 +49,7 @@
               "active": true,
               "name": "msg",
               "req": true,
+              "short": "Response message",
               "type": "`$STRING`"
             },
             {
@@ -140,30 +142,35 @@
               "active": true,
               "name": "base",
               "req": true,
+              "short": "Base currency code",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "code",
               "req": true,
+              "short": "Response code (0 indicates success)",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "date",
               "req": false,
+              "short": "Date of the exchange rates",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "msg",
               "req": true,
+              "short": "Response message",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "rates",
               "req": true,
+              "short": "Map of currency codes to exchange rates",
               "type": "`$OBJECT`"
             },
             {

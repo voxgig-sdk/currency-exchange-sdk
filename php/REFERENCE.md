@@ -97,9 +97,9 @@ $convert = $client->Convert();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `string` | Yes |  |
+| `code` | `string` | Yes | Response code (0 indicates success) |
 | `convert_result` | `array` | Yes |  |
-| `msg` | `string` | Yes |  |
+| `msg` | `string` | Yes | Response message |
 | `time_update` | `array` | Yes |  |
 
 ### Operations
@@ -152,11 +152,11 @@ $rate = $client->Rate();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `string` | Yes |  |
-| `code` | `string` | Yes |  |
-| `date` | `string` | No |  |
-| `msg` | `string` | Yes |  |
-| `rates` | `array` | Yes |  |
+| `base` | `string` | Yes | Base currency code |
+| `code` | `string` | Yes | Response code (0 indicates success) |
+| `date` | `string` | No | Date of the exchange rates |
+| `msg` | `string` | Yes | Response message |
+| `rates` | `array` | Yes | Map of currency codes to exchange rates |
 | `time_update` | `array` | Yes |  |
 
 ### Operations

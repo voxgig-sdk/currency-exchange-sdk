@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "CurrencyExchange",
+			"slug": "currency-exchange",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -38,6 +41,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "code",
 						"req": true,
+						"short": "Response code (0 indicates success)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -48,6 +52,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "msg",
 						"req": true,
+						"short": "Response message",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -128,25 +133,30 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "base",
 						"req": true,
+						"short": "Base currency code",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "code",
 						"req": true,
+						"short": "Response code (0 indicates success)",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "date",
+						"short": "Date of the exchange rates",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "msg",
 						"req": true,
+						"short": "Response message",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "rates",
 						"req": true,
+						"short": "Map of currency codes to exchange rates",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{

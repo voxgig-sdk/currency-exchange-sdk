@@ -92,9 +92,9 @@ convert = client.Convert()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `code` | `str` | Yes |  |
+| `code` | `str` | Yes | Response code (0 indicates success) |
 | `convert_result` | `dict` | Yes |  |
-| `msg` | `str` | Yes |  |
+| `msg` | `str` | Yes | Response message |
 | `time_update` | `dict` | Yes |  |
 
 ### Operations
@@ -146,11 +146,11 @@ rate = client.Rate()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `base` | `str` | Yes |  |
-| `code` | `str` | Yes |  |
-| `date` | `str` | No |  |
-| `msg` | `str` | Yes |  |
-| `rates` | `dict` | Yes |  |
+| `base` | `str` | Yes | Base currency code |
+| `code` | `str` | Yes | Response code (0 indicates success) |
+| `date` | `str` | No | Date of the exchange rates |
+| `msg` | `str` | Yes | Response message |
+| `rates` | `dict` | Yes | Map of currency codes to exchange rates |
 | `time_update` | `dict` | Yes |  |
 
 ### Operations

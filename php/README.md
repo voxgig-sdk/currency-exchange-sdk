@@ -250,9 +250,9 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
+| `code` | Response code (0 indicates success) |
 | `convert_result` |  |
-| `msg` |  |
+| `msg` | Response message |
 | `time_update` |  |
 
 Operations: Load.
@@ -263,11 +263,11 @@ API path: `/convert`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `code` |  |
-| `date` |  |
-| `msg` |  |
-| `rates` |  |
+| `base` | Base currency code |
+| `code` | Response code (0 indicates success) |
+| `date` | Date of the exchange rates |
+| `msg` | Response message |
+| `rates` | Map of currency codes to exchange rates |
 | `time_update` |  |
 
 Operations: Load.
@@ -293,9 +293,9 @@ Create an instance: `$convert = $client->Convert();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
+| `code` | `string` | Response code (0 indicates success) |
 | `convert_result` | `array` |  |
-| `msg` | `string` |  |
+| `msg` | `string` | Response message |
 | `time_update` | `array` |  |
 
 #### Example: Load
@@ -320,11 +320,11 @@ Create an instance: `$rate = $client->Rate();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `code` | `string` |  |
-| `date` | `string` |  |
-| `msg` | `string` |  |
-| `rates` | `array` |  |
+| `base` | `string` | Base currency code |
+| `code` | `string` | Response code (0 indicates success) |
+| `date` | `string` | Date of the exchange rates |
+| `msg` | `string` | Response message |
+| `rates` | `array` | Map of currency codes to exchange rates |
 | `time_update` | `array` |  |
 
 #### Example: Load

@@ -247,9 +247,9 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
+| `code` | Response code (0 indicates success) |
 | `convert_result` |  |
-| `msg` |  |
+| `msg` | Response message |
 | `time_update` |  |
 
 Operations: Load.
@@ -260,11 +260,11 @@ API path: `/convert`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `code` |  |
-| `date` |  |
-| `msg` |  |
-| `rates` |  |
+| `base` | Base currency code |
+| `code` | Response code (0 indicates success) |
+| `date` | Date of the exchange rates |
+| `msg` | Response message |
+| `rates` | Map of currency codes to exchange rates |
 | `time_update` |  |
 
 Operations: Load.
@@ -290,9 +290,9 @@ Create an instance: `convert = client.Convert()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `str` |  |
+| `code` | `str` | Response code (0 indicates success) |
 | `convert_result` | `dict` |  |
-| `msg` | `str` |  |
+| `msg` | `str` | Response message |
 | `time_update` | `dict` |  |
 
 #### Example: Load
@@ -316,11 +316,11 @@ Create an instance: `rate = client.Rate()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `str` |  |
-| `code` | `str` |  |
-| `date` | `str` |  |
-| `msg` | `str` |  |
-| `rates` | `dict` |  |
+| `base` | `str` | Base currency code |
+| `code` | `str` | Response code (0 indicates success) |
+| `date` | `str` | Date of the exchange rates |
+| `msg` | `str` | Response message |
+| `rates` | `dict` | Map of currency codes to exchange rates |
 | `time_update` | `dict` |  |
 
 #### Example: Load

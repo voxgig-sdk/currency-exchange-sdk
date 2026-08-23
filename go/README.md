@@ -6,7 +6,7 @@ The Golang SDK for the CurrencyExchange API — an entity-oriented client using 
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Convert(nil)` — each with the same small set of operations (`Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -264,9 +264,9 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"code"` |  |
+| `"code"` | Response code (0 indicates success) |
 | `"convert_result"` |  |
-| `"msg"` |  |
+| `"msg"` | Response message |
 | `"time_update"` |  |
 
 Operations: Load.
@@ -277,11 +277,11 @@ API path: `/convert`
 
 | Field | Description |
 | --- | --- |
-| `"base"` |  |
-| `"code"` |  |
-| `"date"` |  |
-| `"msg"` |  |
-| `"rates"` |  |
+| `"base"` | Base currency code |
+| `"code"` | Response code (0 indicates success) |
+| `"date"` | Date of the exchange rates |
+| `"msg"` | Response message |
+| `"rates"` | Map of currency codes to exchange rates |
 | `"time_update"` |  |
 
 Operations: Load.
@@ -307,9 +307,9 @@ Create an instance: `convert := client.Convert(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
+| `code` | `string` | Response code (0 indicates success) |
 | `convert_result` | `map[string]any` |  |
-| `msg` | `string` |  |
+| `msg` | `string` | Response message |
 | `time_update` | `map[string]any` |  |
 
 #### Example: Load
@@ -337,11 +337,11 @@ Create an instance: `rate := client.Rate(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `code` | `string` |  |
-| `date` | `string` |  |
-| `msg` | `string` |  |
-| `rates` | `map[string]any` |  |
+| `base` | `string` | Base currency code |
+| `code` | `string` | Response code (0 indicates success) |
+| `date` | `string` | Date of the exchange rates |
+| `msg` | `string` | Response message |
+| `rates` | `map[string]any` | Map of currency codes to exchange rates |
 | `time_update` | `map[string]any` |  |
 
 #### Example: Load

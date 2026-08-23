@@ -230,9 +230,9 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `code` |  |
+| `code` | Response code (0 indicates success) |
 | `convert_result` |  |
-| `msg` |  |
+| `msg` | Response message |
 | `time_update` |  |
 
 Operations: Load.
@@ -243,11 +243,11 @@ API path: `/convert`
 
 | Field | Description |
 | --- | --- |
-| `base` |  |
-| `code` |  |
-| `date` |  |
-| `msg` |  |
-| `rates` |  |
+| `base` | Base currency code |
+| `code` | Response code (0 indicates success) |
+| `date` | Date of the exchange rates |
+| `msg` | Response message |
+| `rates` | Map of currency codes to exchange rates |
 | `time_update` |  |
 
 Operations: Load.
@@ -273,9 +273,9 @@ Create an instance: `local convert = client:Convert(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code` | `string` |  |
+| `code` | `string` | Response code (0 indicates success) |
 | `convert_result` | `table` |  |
-| `msg` | `string` |  |
+| `msg` | `string` | Response message |
 | `time_update` | `table` |  |
 
 #### Example: Load
@@ -299,11 +299,11 @@ Create an instance: `local rate = client:Rate(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `base` | `string` |  |
-| `code` | `string` |  |
-| `date` | `string` |  |
-| `msg` | `string` |  |
-| `rates` | `table` |  |
+| `base` | `string` | Base currency code |
+| `code` | `string` | Response code (0 indicates success) |
+| `date` | `string` | Date of the exchange rates |
+| `msg` | `string` | Response message |
+| `rates` | `table` | Map of currency codes to exchange rates |
 | `time_update` | `table` |  |
 
 #### Example: Load
