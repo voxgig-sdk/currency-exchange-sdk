@@ -28,6 +28,7 @@ module CurrencyExchangeConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
