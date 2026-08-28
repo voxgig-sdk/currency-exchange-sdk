@@ -22,10 +22,10 @@ type Convert struct {
 
 // ConvertLoadMatch is the typed request payload for Convert.LoadTyped.
 type ConvertLoadMatch struct {
-	Code *string `json:"code,omitempty"`
-	ConvertResult *map[string]any `json:"convert_result,omitempty"`
-	Msg *string `json:"msg,omitempty"`
-	TimeUpdate *map[string]any `json:"time_update,omitempty"`
+	Amount *float64 `json:"amount,omitempty"`
+	From string `json:"from"`
+	Key string `json:"key"`
+	To string `json:"to"`
 }
 
 // Rate is the typed data model for the rate entity.
@@ -40,12 +40,10 @@ type Rate struct {
 
 // RateLoadMatch is the typed request payload for Rate.LoadTyped.
 type RateLoadMatch struct {
-	Base *string `json:"base,omitempty"`
-	Code *string `json:"code,omitempty"`
+	Base string `json:"base"`
 	Date *string `json:"date,omitempty"`
-	Msg *string `json:"msg,omitempty"`
-	Rates *map[string]any `json:"rates,omitempty"`
-	TimeUpdate *map[string]any `json:"time_update,omitempty"`
+	Key string `json:"key"`
+	Symbol *string `json:"symbol,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

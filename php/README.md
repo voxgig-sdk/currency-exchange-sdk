@@ -38,7 +38,7 @@ $client = new CurrencyExchangeSDK([
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the Convert record (throws on error).
-    $convert = $client->Convert()->load();
+    $convert = $client->Convert()->load(["from" => "example_from", "key" => "example_key", "to" => "example_to"]);
     print_r($convert);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $convert = $client->Convert()->load();
+    $convert = $client->Convert()->load(["from" => "example", "key" => "example", "to" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -127,7 +127,7 @@ $client = CurrencyExchangeSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$convert = $client->Convert()->load();
+$convert = $client->Convert()->load(["from" => "example", "key" => "example", "to" => "example"]);
 print_r($convert);
 ```
 
@@ -302,7 +302,7 @@ Create an instance: `$convert = $client->Convert();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Convert record (throws on error).
-$convert = $client->Convert()->load();
+$convert = $client->Convert()->load(["from" => "from", "key" => "key", "to" => "to"]);
 ```
 
 
@@ -331,8 +331,31 @@ Create an instance: `$rate = $client->Rate();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Rate record (throws on error).
-$rate = $client->Rate()->load();
+$rate = $client->Rate()->load(["base" => "base", "key" => "key"]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -412,7 +435,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $convert = $client->Convert();
-$convert->load();
+$convert->load(["from" => "example", "key" => "example", "to" => "example"]);
 
 // $convert->data_get() now returns the convert data from the last load
 // $convert->match_get() returns the last match criteria

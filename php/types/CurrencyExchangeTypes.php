@@ -24,10 +24,10 @@ class Convert
 /** Request payload for Convert#load. */
 class ConvertLoadMatch
 {
-    public ?string $code = null;
-    public ?array $convert_result = null;
-    public ?string $msg = null;
-    public ?array $time_update = null;
+    public ?float $amount = null;
+    public string $from;
+    public string $key;
+    public string $to;
 }
 
 /** Rate entity data model. */
@@ -44,11 +44,9 @@ class Rate
 /** Request payload for Rate#load. */
 class RateLoadMatch
 {
-    public ?string $base = null;
-    public ?string $code = null;
+    public string $base;
     public ?string $date = null;
-    public ?string $msg = null;
-    public ?array $rates = null;
-    public ?array $time_update = null;
+    public string $key;
+    public ?string $symbol = null;
 }
 

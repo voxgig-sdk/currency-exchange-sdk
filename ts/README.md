@@ -41,7 +41,7 @@ const client = new CurrencyExchangeSDK({
 
 ```ts
 try {
-  const convert = await client.Convert().load()
+  const convert = await client.Convert().load({ from: 'example_from', key: 'example_key', to: 'example_to' })
   console.log(convert)
 } catch (err) {
   console.error('load failed:', err)
@@ -55,7 +55,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const convert = await client.Convert().load()
+  const convert = await client.Convert().load({ from: "example", key: "example", to: "example" })
   console.log(convert)
 } catch (err) {
   console.error('load failed:', err)
@@ -122,7 +122,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = CurrencyExchangeSDK.test()
 
-const convert = await client.Convert().load()
+const convert = await client.Convert().load({ from: 'example_from', key: 'example_key', to: 'example_to' })
 // convert is the entity, populated with mock response data
 // — call convert.data() for the record itself
 console.log(convert)
@@ -143,7 +143,7 @@ Entity instances remember their last match and data:
 const entity = client.Convert()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ from: 'example_from', key: 'example_key', to: 'example_to' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -343,7 +343,7 @@ Create an instance: `const convert = client.Convert()`
 #### Example: Load
 
 ```ts
-const convert = await client.Convert().load()
+const convert = await client.Convert().load({ from: 'from', key: 'key', to: 'to' })
 ```
 
 
@@ -371,8 +371,31 @@ Create an instance: `const rate = client.Rate()`
 #### Example: Load
 
 ```ts
-const rate = await client.Rate().load()
+const rate = await client.Rate().load({ base: 'base', key: 'key' })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -445,7 +468,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const convert = client.Convert()
-await convert.load()
+await convert.load({ from: "example", key: "example", to: "example" })
 
 // convert.data() now returns the convert data from the last `load`
 // convert.match() returns the last match criteria

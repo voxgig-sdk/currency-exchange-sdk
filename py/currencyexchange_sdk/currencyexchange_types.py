@@ -23,11 +23,13 @@ class Convert(TypedDict):
     time_update: dict
 
 
-class ConvertLoadMatch(TypedDict, total=False):
-    code: str
-    convert_result: dict
-    msg: str
-    time_update: dict
+class ConvertLoadMatchRequired(TypedDict):
+    key: str
+    to: str
+
+
+class ConvertLoadMatch(ConvertLoadMatchRequired, total=False):
+    amount: float
 
 
 class RateRequired(TypedDict):
@@ -42,10 +44,11 @@ class Rate(RateRequired, total=False):
     date: str
 
 
-class RateLoadMatch(TypedDict, total=False):
+class RateLoadMatchRequired(TypedDict):
     base: str
-    code: str
+    key: str
+
+
+class RateLoadMatch(RateLoadMatchRequired, total=False):
     date: str
-    msg: str
-    rates: dict
-    time_update: dict
+    symbol: str

@@ -31,22 +31,22 @@ Convert = Struct.new(
 
 # Request payload for Convert#load.
 #
-# @!attribute [rw] code
-#   @return [String, nil]
+# @!attribute [rw] amount
+#   @return [Float, nil]
 #
-# @!attribute [rw] convert_result
-#   @return [Hash, nil]
+# @!attribute [rw] from
+#   @return [String]
 #
-# @!attribute [rw] msg
-#   @return [String, nil]
+# @!attribute [rw] key
+#   @return [String]
 #
-# @!attribute [rw] time_update
-#   @return [Hash, nil]
+# @!attribute [rw] to
+#   @return [String]
 ConvertLoadMatch = Struct.new(
-  :code,
-  :convert_result,
-  :msg,
-  :time_update,
+  :amount,
+  :from,
+  :key,
+  :to,
   keyword_init: true
 )
 
@@ -82,29 +82,21 @@ Rate = Struct.new(
 # Request payload for Rate#load.
 #
 # @!attribute [rw] base
-#   @return [String, nil]
-#
-# @!attribute [rw] code
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] date
 #   @return [String, nil]
 #
-# @!attribute [rw] msg
+# @!attribute [rw] key
+#   @return [String]
+#
+# @!attribute [rw] symbol
 #   @return [String, nil]
-#
-# @!attribute [rw] rates
-#   @return [Hash, nil]
-#
-# @!attribute [rw] time_update
-#   @return [Hash, nil]
 RateLoadMatch = Struct.new(
   :base,
-  :code,
   :date,
-  :msg,
-  :rates,
-  :time_update,
+  :key,
+  :symbol,
   keyword_init: true
 )
 

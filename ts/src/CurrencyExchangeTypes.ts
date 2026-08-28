@@ -13,10 +13,10 @@ export interface Convert {
 }
 
 export interface ConvertLoadMatch {
-  code?: string
-  convert_result?: Record<string, any>
-  msg?: string
-  time_update?: Record<string, any>
+  amount?: number
+  from: string
+  key: string
+  to: string
 }
 
 export interface Rate {
@@ -29,11 +29,9 @@ export interface Rate {
 }
 
 export interface RateLoadMatch {
-  base?: string
-  code?: string
+  base: string
   date?: string
-  msg?: string
-  rates?: Record<string, any>
-  time_update?: Record<string, any>
+  key: string
+  symbol?: string
 }
 

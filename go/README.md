@@ -54,7 +54,7 @@ func main() {
     })
 
     // Load a single convert — the value is the loaded record.
-    convert, err := client.Convert(nil).Load(nil, nil)
+    convert, err := client.Convert(nil).Load(map[string]any{"from": "example_from", "key": "example_key", "to": "example_to"}, nil)
     if err != nil {
         panic(err)
     }
@@ -69,7 +69,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-convert, err := client.Convert(nil).Load(nil, nil)
+convert, err := client.Convert(nil).Load(map[string]any{"from": "example", "key": "example", "to": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -139,7 +139,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 convert, err := client.Convert(nil).Load(
-    nil, nil,
+    map[string]any{"from": "example", "key": "example", "to": "example"}, nil,
 )
 if err != nil {
     panic(err)
@@ -315,7 +315,7 @@ Create an instance: `convert := client.Convert(nil)`
 #### Example: Load
 
 ```go
-convert, err := client.Convert(nil).Load(nil, nil)
+convert, err := client.Convert(nil).Load(map[string]any{"from": "from", "key": "key", "to": "to"}, nil)
 if err != nil {
     panic(err)
 }
@@ -347,12 +347,35 @@ Create an instance: `rate := client.Rate(nil)`
 #### Example: Load
 
 ```go
-rate, err := client.Rate(nil).Load(nil, nil)
+rate, err := client.Rate(nil).Load(map[string]any{"base": "base", "key": "key"}, nil)
 if err != nil {
     panic(err)
 }
 fmt.Println(rate) // the loaded record
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -429,7 +452,7 @@ stores the returned data and match criteria internally.
 
 ```go
 convert := client.Convert(nil)
-convert.Load(nil, nil)
+convert.Load(map[string]any{"from": "example", "key": "example", "to": "example"}, nil)
 
 // convert.Data() now returns the convert data from the last load
 // convert.Match() returns the last match criteria
