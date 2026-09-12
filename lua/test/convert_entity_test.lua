@@ -91,7 +91,7 @@ function convert_basic_setup(extra)
     ["CURRENCY_EXCHANGE_TEST_CONVERT_ENTID"] = idmap,
     ["CURRENCY_EXCHANGE_TEST_LIVE"] = "FALSE",
     ["CURRENCY_EXCHANGE_TEST_EXPLAIN"] = "FALSE",
-    ["CURRENCY_EXCHANGE_APIKEY"] = "NONE",
+    ["CURRENCY_EXCHANGE_APIKEY"] = "",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -102,6 +102,9 @@ function convert_basic_setup(extra)
 
   if env["CURRENCY_EXCHANGE_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
+      -- FIRST, so the generated fields below win: sdk-test-control.json's
+      -- test.client.options adds to the live client, it does not redirect it.
+      runner.live_client_options(),
       {
         apikey = env["CURRENCY_EXCHANGE_APIKEY"],
       },

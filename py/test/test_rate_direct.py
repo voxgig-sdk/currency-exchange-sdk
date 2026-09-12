@@ -63,15 +63,18 @@ def _rate_direct_setup(mockres):
     env = runner.env_override({
         "CURRENCY_EXCHANGE_TEST_RATE_ENTID": {},
         "CURRENCY_EXCHANGE_TEST_LIVE": "FALSE",
-        "CURRENCY_EXCHANGE_APIKEY": "NONE",
+        "CURRENCY_EXCHANGE_APIKEY": "",
     })
 
     live = env.get("CURRENCY_EXCHANGE_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("CURRENCY_EXCHANGE_APIKEY"),
-        }
+        })
         client = CurrencyExchangeSDK(merged_opts)
         return {
             "client": client,

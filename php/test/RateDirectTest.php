@@ -73,15 +73,17 @@ function rate_direct_setup($mockres)
     $env = Runner::env_override([
         "CURRENCY_EXCHANGE_TEST_RATE_ENTID" => [],
         "CURRENCY_EXCHANGE_TEST_LIVE" => "FALSE",
-        "CURRENCY_EXCHANGE_APIKEY" => "NONE",
+        "CURRENCY_EXCHANGE_APIKEY" => "",
     ]);
 
     $live = $env["CURRENCY_EXCHANGE_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["CURRENCY_EXCHANGE_APIKEY"],
-        ];
+        ]);
         $client = new CurrencyExchangeSDK($merged_opts);
         return [
             "client" => $client,

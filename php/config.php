@@ -128,8 +128,10 @@ class CurrencyExchangeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/convert',
-                  'parts' => [
-                    'convert',
+                  'segments' => [
+                    [
+                      'lit' => 'convert',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -142,6 +144,9 @@ class CurrencyExchangeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'convert',
                   ],
                 ],
               ],
@@ -166,6 +171,7 @@ class CurrencyExchangeConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date',
               'name' => 'date',
               'short' => 'Date of the exchange rates',
               'type' => '`$STRING`',
@@ -231,8 +237,10 @@ class CurrencyExchangeConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/rates',
-                  'parts' => [
-                    'rates',
+                  'segments' => [
+                    [
+                      'lit' => 'rates',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -245,6 +253,9 @@ class CurrencyExchangeConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'rates',
                   ],
                 ],
               ],

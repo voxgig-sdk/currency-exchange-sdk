@@ -107,14 +107,22 @@ func convertDirectSetup(mockres any) *convertDirectSetupResult {
 	env := envOverride(map[string]any{
 		"CURRENCY_EXCHANGE_TEST_CONVERT_ENTID": map[string]any{},
 		"CURRENCY_EXCHANGE_TEST_LIVE":    "FALSE",
-		"CURRENCY_EXCHANGE_APIKEY":       "NONE",
+		"CURRENCY_EXCHANGE_APIKEY":       "",
 	})
 
 	live := env["CURRENCY_EXCHANGE_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["CURRENCY_EXCHANGE_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewCurrencyExchangeSDK(mergedOpts)
 

@@ -102,8 +102,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/convert",
-                ["parts"] = {
-                  "convert",
+                ["segments"] = {
+                  {
+                    ["lit"] = "convert",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -116,6 +118,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "convert",
                 },
               },
             },
@@ -140,6 +145,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date",
             ["name"] = "date",
             ["short"] = "Date of the exchange rates",
             ["type"] = "`$STRING`",
@@ -205,8 +211,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/rates",
-                ["parts"] = {
-                  "rates",
+                ["segments"] = {
+                  {
+                    ["lit"] = "rates",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -219,6 +227,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "rates",
                 },
               },
             },

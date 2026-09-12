@@ -18,6 +18,7 @@ main: kit: entity: rate: {
       type: "`$STRING`"
     }
     {
+      format: "date"
       name: "date"
       req: false
       short: "Date of the exchange rates"
@@ -85,8 +86,10 @@ main: kit: entity: rate: {
           }
           method: "GET"
           orig: "/rates"
-          parts: [
-            "rates"
+          segments: [
+            {
+              lit: "rates"
+            }
           ]
           select: {
             exist: [

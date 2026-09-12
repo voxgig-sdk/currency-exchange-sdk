@@ -114,8 +114,10 @@ module CurrencyExchangeConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/convert",
-                  "parts" => [
-                    "convert",
+                  "segments" => [
+                    {
+                      "lit" => "convert",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -129,6 +131,9 @@ module CurrencyExchangeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "convert",
+                  ],
                 },
               ],
             },
@@ -152,6 +157,7 @@ module CurrencyExchangeConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date",
               "name" => "date",
               "short" => "Date of the exchange rates",
               "type" => "`$STRING`",
@@ -217,8 +223,10 @@ module CurrencyExchangeConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/rates",
-                  "parts" => [
-                    "rates",
+                  "segments" => [
+                    {
+                      "lit" => "rates",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -232,6 +240,9 @@ module CurrencyExchangeConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "rates",
+                  ],
                 },
               ],
             },

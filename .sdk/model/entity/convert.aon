@@ -72,8 +72,10 @@ main: kit: entity: convert: {
           }
           method: "GET"
           orig: "/convert"
-          parts: [
-            "convert"
+          segments: [
+            {
+              lit: "convert"
+            }
           ]
           select: {
             exist: [
