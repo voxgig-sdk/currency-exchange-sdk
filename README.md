@@ -105,7 +105,7 @@ local result, err = client:Convert():load({ from = "example", key = "example", t
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
+| TypeScript | `@voxgig-sdk/currency-exchange-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
 | Python | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
 | PHP | `voxgig-sdk/currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/currency-exchange-sdk/go` | `go get github.com/voxgig-sdk/currency-exchange-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Convert():load({ from = "example", key = "example", t
 ### TypeScript
 
 ```ts
-import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange'
+import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange-sdk'
 
 const client = new CurrencyExchangeSDK({
   apikey: process.env.CURRENCY_EXCHANGE_APIKEY,

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange'
+import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange-sdk'
 
 const client = new CurrencyExchangeSDK({
   apikey: process.env.CURRENCY_EXCHANGE_APIKEY,
@@ -457,7 +457,7 @@ currency-exchange/
 Import the SDK from the package root:
 
 ```ts
-import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange'
+import { CurrencyExchangeSDK } from '@voxgig-sdk/currency-exchange-sdk'
 ```
 
 ### Entity state
