@@ -4,7 +4,10 @@ declare(strict_types=1);
 // CurrencyExchange SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class CurrencyExchangeFeatures
@@ -14,8 +17,14 @@ class CurrencyExchangeFeatures
         switch ($name) {
             case "base":
                 return new CurrencyExchangeBaseFeature();
+            case "ratelimit":
+                return new CurrencyExchangeRatelimitFeature();
+            case "retry":
+                return new CurrencyExchangeRetryFeature();
             case "test":
                 return new CurrencyExchangeTestFeature();
+            case "timeout":
+                return new CurrencyExchangeTimeoutFeature();
             default:
                 return new CurrencyExchangeBaseFeature();
         }
@@ -31,7 +40,10 @@ class CurrencyExchangeFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

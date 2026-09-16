@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { CurrencyExchangeSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('RateEntity', async () => {
 
     const live = 'TRUE' === process.env.CURRENCY_EXCHANGE_TEST_LIVE
     for (const op of ['load']) {
-      if (maybeSkipControl(t, 'entityOp', 'rate.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'rate.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set CURRENCY_EXCHANGE_TEST_RATE_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"base","req":true,"short":"Base currency code","type":"`$STRING`","index$":0},{"active":true,"name":"code","req":true,"short":"Response code (0 indicates success)","type":"`$STRING`","index$":1},{"active":true,"format":"date","name":"date","req":false,"short":"Date of the exchange rates","type":"`$STRING`","index$":2},{"active":true,"name":"msg","req":true,"short":"Response message","type":"`$STRING`","index$":3},{"active":true,"name":"rates","req":true,"short":"Map of currency codes to exchange rates","type":"`$OBJECT`","index$":4},{"active":true,"name":"time_update","req":true,"type":"`$OBJECT`","index$":5}],"name":"rate","op":{"load":{"input":"data","name":"load","points":[{"active":true,"args":{"query":[{"active":true,"example":"USD","kind":"query","name":"base","orig":"base","reqd":true,"type":"`$STRING`","index$":0},{"active":true,"example":"2025-06-26","kind":"query","name":"date","orig":"date","reqd":false,"type":"`$STRING`","index$":1},{"active":true,"kind":"query","name":"key","orig":"key","reqd":true,"type":"`$STRING`","index$":2},{"active":true,"example":"CNY,EUR,GBP","kind":"query","name":"symbol","orig":"symbol","reqd":false,"type":"`$STRING`","index$":3}]},"contract":{"id":"GET /rates","json":"{\"operationId\":\"getExchangeRates\",\"parameters\":[{\"description\":\"Base currency code (e.g., USD, EUR, JPY)\",\"in\":\"query\",\"name\":\"base\",\"required\":true,\"schema\":{\"example\":\"USD\",\"type\":\"string\"}},{\"description\":\"Date for historical rates in YYYY-MM-DD format. If not provided, returns latest rates.\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"example\":\"2025-06-26\",\"format\":\"date\",\"type\":\"string\"}},{\"description\":\"Comma-separated list of target currency codes to limit results (e.g., CNY,EUR,GBP)\",\"in\":\"query\",\"name\":\"symbols\",\"required\":false,\"schema\":{\"example\":\"CNY,EUR,GBP\",\"type\":\"string\"}},{\"description\":\"API key for authentication\",\"in\":\"query\",\"name\":\"key\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"base\":\"USD\",\"code\":\"0\",\"date\":\"2025-06-26\",\"msg\":\"Success\",\"rates\":{\"CNY\":7.26,\"EUR\":0.92,\"GBP\":0.79,\"JPY\":149.85},\"time_update\":{\"time_unix\":1750959474,\"time_utc\":\"2025-06-26T03:17:54Z\",\"time_zone\":\"UTC\"}},\"schema\":{\"properties\":{\"base\":{\"description\":\"Base currency code\",\"example\":\"USD\",\"type\":\"string\"},\"code\":{\"description\":\"Response code (0 indicates success)\",\"example\":\"0\",\"type\":\"string\"},\"date\":{\"description\":\"Date of the exchange rates\",\"example\":\"2025-06-26\",\"format\":\"date\",\"type\":\"string\"},\"msg\":{\"description\":\"Response message\",\"example\":\"Success\",\"type\":\"string\"},\"rates\":{\"additionalProperties\":{\"format\":\"double\",\"type\":\"number\"},\"description\":\"Map of currency codes to exchange rates\",\"example\":{\"CNY\":7.26,\"EUR\":0.92,\"GBP\":0.79,\"JPY\":149.85},\"type\":\"object\"},\"time_update\":{\"properties\":{\"time_unix\":{\"description\":\"Unix timestamp of the last update\",\"example\":1750959474,\"format\":\"int64\",\"type\":\"integer\"},\"time_utc\":{\"description\":\"UTC timestamp in ISO 8601 format\",\"example\":\"2025-06-26T03:17:54Z\",\"format\":\"date-time\",\"type\":\"string\"},\"time_zone\":{\"description\":\"Time zone of the timestamp\",\"example\":\"UTC\",\"type\":\"string\"}},\"required\":[\"time_unix\",\"time_utc\",\"time_zone\"],\"type\":\"object\"}},\"required\":[\"code\",\"msg\",\"base\",\"rates\"],\"type\":\"object\"}}},\"description\":\"Successful response with exchange rates\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"400\",\"type\":\"string\"},\"msg\":{\"description\":\"Error message\",\"example\":\"Invalid currency code\",\"type\":\"string\"}},\"required\":[\"code\",\"msg\"],\"type\":\"object\"}}},\"description\":\"Bad request - Invalid parameters\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"400\",\"type\":\"string\"},\"msg\":{\"description\":\"Error message\",\"example\":\"Invalid currency code\",\"type\":\"string\"}},\"required\":[\"code\",\"msg\"],\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid API key\"},\"429\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"400\",\"type\":\"string\"},\"msg\":{\"description\":\"Error message\",\"example\":\"Invalid currency code\",\"type\":\"string\"}},\"required\":[\"code\",\"msg\"],\"type\":\"object\"}}},\"description\":\"Too many requests - Rate limit exceeded\"},\"500\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"400\",\"type\":\"string\"},\"msg\":{\"description\":\"Error message\",\"example\":\"Invalid currency code\",\"type\":\"string\"}},\"required\":[\"code\",\"msg\"],\"type\":\"object\"}}},\"description\":\"Internal server error\"}},\"security\":[{\"ApiKeyAuth\":[]}],\"securitySchemes\":{\"ApiKeyAuth\":{\"description\":\"API key for authentication. Get your free API key at https://www.juheapi.com\",\"in\":\"query\",\"name\":\"key\",\"type\":\"apiKey\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/rates","segments":[{"lit":"rates"}],"select":{"exist":["base","date","key","symbol"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"rate","name__orig":"rate","Name":"Rate","name_":"rate","name-":"rate","NAME":"RATE","index$":1}, {"active":true,"entity":"rate","key$":"BasicRateFlow","kind":"basic","name":"BasicRateFlow","param":{},"step":[{"active":true,"data":{},"input":{"ref":"rate_ref01","srcdatavar":"rate_ref01_data","suffix":"_dt0"},"match":{},"op":"load","spec":[],"valid":[{"apply":"TextFieldMark","def":{"mark":"Mark01-rate_ref01"}}],"index$":0}]}, 'Rate')
     }
     const client = setup.client
     const struct = setup.struct
@@ -109,13 +108,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['CURRENCY_EXCHANGE_TEST_RATE_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'CURRENCY_EXCHANGE_TEST_RATE_ENTID': idmap,
     'CURRENCY_EXCHANGE_TEST_LIVE': 'FALSE',
@@ -127,7 +119,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.CURRENCY_EXCHANGE_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['CURRENCY_EXCHANGE_TEST_RATE_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new CurrencyExchangeSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -140,7 +138,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -153,7 +152,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.CURRENCY_EXCHANGE_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 
