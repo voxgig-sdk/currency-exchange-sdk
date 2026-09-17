@@ -1,4 +1,4 @@
 # Entity Models
 
-@"convert.aon"
-@"rate.aon"
+@"./convert.aon"
+@"./rate.aon"

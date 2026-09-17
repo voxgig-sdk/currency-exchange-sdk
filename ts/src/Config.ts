@@ -123,6 +123,8 @@ class Config {
 
     auth: {
       prefix: '',
+      in: 'query',
+      name: 'key',
     },
 
     headers: {
@@ -131,12 +133,12 @@ class Config {
 
     entity: {
       
-      convert: {
-      },
-
-      rate: {
-      },
-
+        convert: {
+        },
+  
+        rate: {
+        },
+  
     }
   }
 

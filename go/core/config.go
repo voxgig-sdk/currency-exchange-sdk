@@ -81,6 +81,8 @@ func MakeConfig() map[string]any {
 			"base": "https://hub.juheapi.com/exchangerate/v2",
 			"auth": map[string]any{
 				"prefix": "",
+				"in": "query",
+				"name": "key",
 			},
 			"headers": map[string]any{
 				"content-type": "application/json",

@@ -104,6 +104,8 @@ class Config {
         base: "https://hub.juheapi.com/exchangerate/v2",
         auth: {
             prefix: '',
+            in: 'query',
+            name: 'key',
         },
         headers: {
             "content-type": "application/json"

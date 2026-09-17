@@ -105,12 +105,12 @@ local result, err = client:Convert():load({ from = "example", key = "example", t
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/currency-exchange-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
-| Python | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
-| PHP | `voxgig-sdk/currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
+| TypeScript | `@voxgig-sdk/currency-exchange-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/tags) |
+| Python | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/tags) |
+| PHP | `voxgig-sdk/currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/currency-exchange-sdk/go` | `go get github.com/voxgig-sdk/currency-exchange-sdk/go@latest` |
-| Ruby | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
-| Lua | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/releases) |
+| Ruby | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/tags) |
+| Lua | `voxgig-sdk-currency-exchange` | publish pending — [install from git tag](https://github.com/voxgig-sdk/currency-exchange-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/currency-exchange-sdk/go-cli` | `go install github.com/voxgig-sdk/currency-exchange-sdk/go-cli/cmd/currency-exchange@latest` |
 | Go MCP server | `github.com/voxgig-sdk/currency-exchange-sdk/go-mcp` | `go get github.com/voxgig-sdk/currency-exchange-sdk/go-mcp@latest` |
 
