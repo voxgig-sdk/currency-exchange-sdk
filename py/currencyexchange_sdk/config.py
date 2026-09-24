@@ -122,25 +122,29 @@ def make_config():
         "fields": [
           {
             "name": "code",
+            "title": "Code",
+            "type": "`$STRING`",
             "req": True,
             "short": "Response code (0 indicates success)",
-            "type": "`$STRING`",
           },
           {
             "name": "convert_result",
-            "req": True,
+            "title": "Convert Result",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "msg",
+            "title": "Msg",
+            "type": "`$STRING`",
             "req": True,
             "short": "Response message",
-            "type": "`$STRING`",
           },
           {
             "name": "time_update",
-            "req": True,
+            "title": "Time Update",
             "type": "`$OBJECT`",
+            "req": True,
           },
         ],
         "name": "convert",
@@ -150,40 +154,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": 100,
-                      "kind": "query",
-                      "name": "amount",
-                      "orig": "amount",
-                      "type": "`$NUMBER`",
-                    },
-                    {
-                      "example": "USD",
-                      "kind": "query",
-                      "name": "from",
-                      "orig": "from",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "key",
-                      "orig": "key",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "CNY",
-                      "kind": "query",
-                      "name": "to",
-                      "orig": "to",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/convert",
@@ -192,6 +162,48 @@ def make_config():
                     "lit": "convert",
                   },
                 ],
+                "parts": [
+                  "convert",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "amount",
+                      "orig": "amount",
+                      "type": "`$NUMBER`",
+                      "kind": "query",
+                      "example": 100,
+                    },
+                    {
+                      "name": "from",
+                      "orig": "from",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "USD",
+                    },
+                    {
+                      "name": "key",
+                      "orig": "key",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "to",
+                      "orig": "to",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "CNY",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "amount",
@@ -200,13 +212,6 @@ def make_config():
                     "to",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "convert",
-                ],
               },
             ],
           },
@@ -219,38 +224,44 @@ def make_config():
         "fields": [
           {
             "name": "base",
+            "title": "Base",
+            "type": "`$STRING`",
             "req": True,
             "short": "Base currency code",
-            "type": "`$STRING`",
           },
           {
             "name": "code",
+            "title": "Code",
+            "type": "`$STRING`",
             "req": True,
             "short": "Response code (0 indicates success)",
-            "type": "`$STRING`",
           },
           {
-            "format": "date",
             "name": "date",
-            "short": "Date of the exchange rates",
+            "title": "Date",
             "type": "`$STRING`",
+            "short": "Date of the exchange rates",
+            "format": "date",
           },
           {
             "name": "msg",
+            "title": "Msg",
+            "type": "`$STRING`",
             "req": True,
             "short": "Response message",
-            "type": "`$STRING`",
           },
           {
             "name": "rates",
+            "title": "Rates",
+            "type": "`$OBJECT`",
             "req": True,
             "short": "Map of currency codes to exchange rates",
-            "type": "`$OBJECT`",
           },
           {
             "name": "time_update",
-            "req": True,
+            "title": "Time Update",
             "type": "`$OBJECT`",
+            "req": True,
           },
         ],
         "name": "rate",
@@ -260,39 +271,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "USD",
-                      "kind": "query",
-                      "name": "base",
-                      "orig": "base",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "2025-06-26",
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "key",
-                      "orig": "key",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "CNY,EUR,GBP",
-                      "kind": "query",
-                      "name": "symbol",
-                      "orig": "symbol",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/rates",
@@ -301,6 +279,47 @@ def make_config():
                     "lit": "rates",
                   },
                 ],
+                "parts": [
+                  "rates",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "base",
+                      "orig": "base",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "USD",
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "2025-06-26",
+                    },
+                    {
+                      "name": "key",
+                      "orig": "key",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "symbol",
+                      "orig": "symbol",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "CNY,EUR,GBP",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "base",
@@ -309,13 +328,6 @@ def make_config():
                     "symbol",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "rates",
-                ],
               },
             ],
           },

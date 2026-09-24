@@ -1,0 +1,108 @@
+# Entity: convert
+
+main: kit: entity: convert: {
+
+  alias: field: {}
+
+  fields: {
+    code: {
+      h: "Code"
+      n: "code"
+      r: true
+      sh: "Response code (0 indicates success)"
+      t: "`$STRING`"
+    }
+    convert_result: {
+      h: "Convert Result"
+      n: "convert_result"
+      r: true
+      t: "`$OBJECT`"
+    }
+    msg: {
+      h: "Msg"
+      n: "msg"
+      r: true
+      sh: "Response message"
+      t: "`$STRING`"
+    }
+    time_update: {
+      h: "Time Update"
+      n: "time_update"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "convert"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /convert"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 100
+                k: "query"
+                n: "amount"
+                or: "amount"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: "USD"
+                k: "query"
+                n: "from"
+                or: "from"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "key"
+                or: "key"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "CNY"
+                k: "query"
+                n: "to"
+                or: "to"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/convert"
+          q: {
+            exist: [
+              "amount"
+              "from"
+              "key"
+              "to"
+            ]
+          }
+          s: [
+            {
+              lit: "convert"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

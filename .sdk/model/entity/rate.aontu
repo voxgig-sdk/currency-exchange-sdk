@@ -1,0 +1,124 @@
+# Entity: rate
+
+main: kit: entity: rate: {
+
+  alias: field: {}
+
+  fields: {
+    base: {
+      h: "Base"
+      n: "base"
+      r: true
+      sh: "Base currency code"
+      t: "`$STRING`"
+    }
+    code: {
+      h: "Code"
+      n: "code"
+      r: true
+      sh: "Response code (0 indicates success)"
+      t: "`$STRING`"
+    }
+    date: {
+      fo: "date"
+      h: "Date"
+      n: "date"
+      r: false
+      sh: "Date of the exchange rates"
+      t: "`$STRING`"
+    }
+    msg: {
+      h: "Msg"
+      n: "msg"
+      r: true
+      sh: "Response message"
+      t: "`$STRING`"
+    }
+    rates: {
+      h: "Rates"
+      n: "rates"
+      r: true
+      sh: "Map of currency codes to exchange rates"
+      t: "`$OBJECT`"
+    }
+    time_update: {
+      h: "Time Update"
+      n: "time_update"
+      r: true
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "rate"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /rates"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "USD"
+                k: "query"
+                n: "base"
+                or: "base"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "2025-06-26"
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "key"
+                or: "key"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "CNY,EUR,GBP"
+                k: "query"
+                n: "symbol"
+                or: "symbol"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/rates"
+          q: {
+            exist: [
+              "base"
+              "date"
+              "key"
+              "symbol"
+            ]
+          }
+          s: [
+            {
+              lit: "rates"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

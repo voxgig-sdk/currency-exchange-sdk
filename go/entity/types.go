@@ -1,7 +1,7 @@
 // Typed models for the CurrencyExchange SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,10 +14,6 @@ import (
 
 // Convert is the typed data model for the convert entity.
 type Convert struct {
-	Code string `json:"code"`
-	ConvertResult map[string]any `json:"convert_result"`
-	Msg string `json:"msg"`
-	TimeUpdate map[string]any `json:"time_update"`
 }
 
 // ConvertLoadMatch is the typed request payload for Convert.LoadTyped.
@@ -30,12 +26,6 @@ type ConvertLoadMatch struct {
 
 // Rate is the typed data model for the rate entity.
 type Rate struct {
-	Base string `json:"base"`
-	Code string `json:"code"`
-	Date *string `json:"date,omitempty"`
-	Msg string `json:"msg"`
-	Rates map[string]any `json:"rates"`
-	TimeUpdate map[string]any `json:"time_update"`
 }
 
 // RateLoadMatch is the typed request payload for Rate.LoadTyped.

@@ -1,0 +1,28 @@
+# BasicConvertFlow
+
+main: kit: flow: BasicConvertFlow:
+{
+  entity: "convert",
+  kind: "basic",
+  name: "BasicConvertFlow",
+  step: [
+    {
+      i: {
+        ref: "convert_ref01",
+        srcdatavar: "convert_ref01_data",
+        suffix: "_dt0"
+      }
+
+      o: "load",
+      v: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-convert_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConvertFlow"
+}

@@ -11,19 +11,12 @@ const FEATURE_CLASS = {
     test: TestFeature_1.TestFeature,
     timeout: TimeoutFeature_1.TimeoutFeature,
 };
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS = {};
 exports.FEATURE_PLUGINS = FEATURE_PLUGINS;
 class Config {
     makeFeature(fn) {
         const fc = FEATURE_CLASS[fn];
         const fi = new fc();
-        // TODO: errors etc
         return fi;
     }
     // False for a feature added at runtime via options.extend (station's
@@ -120,25 +113,29 @@ class Config {
             "fields": [
                 {
                     "name": "code",
+                    "title": "Code",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Response code (0 indicates success)",
-                    "type": "`$STRING`"
+                    "short": "Response code (0 indicates success)"
                 },
                 {
                     "name": "convert_result",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Convert Result",
+                    "type": "`$OBJECT`",
+                    "req": true
                 },
                 {
                     "name": "msg",
+                    "title": "Msg",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Response message",
-                    "type": "`$STRING`"
+                    "short": "Response message"
                 },
                 {
                     "name": "time_update",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Time Update",
+                    "type": "`$OBJECT`",
+                    "req": true
                 }
             ],
             "name": "convert",
@@ -148,40 +145,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": 100,
-                                        "kind": "query",
-                                        "name": "amount",
-                                        "orig": "amount",
-                                        "type": "`$NUMBER`"
-                                    },
-                                    {
-                                        "example": "USD",
-                                        "kind": "query",
-                                        "name": "from",
-                                        "orig": "from",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "key",
-                                        "orig": "key",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "CNY",
-                                        "kind": "query",
-                                        "name": "to",
-                                        "orig": "to",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/convert",
@@ -190,6 +153,48 @@ class Config {
                                     "lit": "convert"
                                 }
                             ],
+                            "parts": [
+                                "convert"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "amount",
+                                        "orig": "amount",
+                                        "type": "`$NUMBER`",
+                                        "kind": "query",
+                                        "example": 100
+                                    },
+                                    {
+                                        "name": "from",
+                                        "orig": "from",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "USD"
+                                    },
+                                    {
+                                        "name": "key",
+                                        "orig": "key",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "to",
+                                        "orig": "to",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "CNY"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "amount",
@@ -197,14 +202,7 @@ class Config {
                                     "key",
                                     "to"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "convert"
-                            ]
+                            }
                         }
                     ]
                 }
@@ -217,38 +215,44 @@ class Config {
             "fields": [
                 {
                     "name": "base",
+                    "title": "Base",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Base currency code",
-                    "type": "`$STRING`"
+                    "short": "Base currency code"
                 },
                 {
                     "name": "code",
+                    "title": "Code",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Response code (0 indicates success)",
-                    "type": "`$STRING`"
+                    "short": "Response code (0 indicates success)"
                 },
                 {
-                    "format": "date",
                     "name": "date",
+                    "title": "Date",
+                    "type": "`$STRING`",
                     "short": "Date of the exchange rates",
-                    "type": "`$STRING`"
+                    "format": "date"
                 },
                 {
                     "name": "msg",
+                    "title": "Msg",
+                    "type": "`$STRING`",
                     "req": true,
-                    "short": "Response message",
-                    "type": "`$STRING`"
+                    "short": "Response message"
                 },
                 {
                     "name": "rates",
+                    "title": "Rates",
+                    "type": "`$OBJECT`",
                     "req": true,
-                    "short": "Map of currency codes to exchange rates",
-                    "type": "`$OBJECT`"
+                    "short": "Map of currency codes to exchange rates"
                 },
                 {
                     "name": "time_update",
-                    "req": true,
-                    "type": "`$OBJECT`"
+                    "title": "Time Update",
+                    "type": "`$OBJECT`",
+                    "req": true
                 }
             ],
             "name": "rate",
@@ -258,39 +262,6 @@ class Config {
                     "name": "load",
                     "points": [
                         {
-                            "args": {
-                                "query": [
-                                    {
-                                        "example": "USD",
-                                        "kind": "query",
-                                        "name": "base",
-                                        "orig": "base",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "2025-06-26",
-                                        "kind": "query",
-                                        "name": "date",
-                                        "orig": "date",
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "kind": "query",
-                                        "name": "key",
-                                        "orig": "key",
-                                        "reqd": true,
-                                        "type": "`$STRING`"
-                                    },
-                                    {
-                                        "example": "CNY,EUR,GBP",
-                                        "kind": "query",
-                                        "name": "symbol",
-                                        "orig": "symbol",
-                                        "type": "`$STRING`"
-                                    }
-                                ]
-                            },
                             "kind": "http",
                             "method": "GET",
                             "orig": "/rates",
@@ -299,6 +270,47 @@ class Config {
                                     "lit": "rates"
                                 }
                             ],
+                            "parts": [
+                                "rates"
+                            ],
+                            "rename": {},
+                            "transform": {
+                                "req": "`reqdata`",
+                                "res": "`body`"
+                            },
+                            "args": {
+                                "query": [
+                                    {
+                                        "name": "base",
+                                        "orig": "base",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true,
+                                        "example": "USD"
+                                    },
+                                    {
+                                        "name": "date",
+                                        "orig": "date",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "2025-06-26"
+                                    },
+                                    {
+                                        "name": "key",
+                                        "orig": "key",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "reqd": true
+                                    },
+                                    {
+                                        "name": "symbol",
+                                        "orig": "symbol",
+                                        "type": "`$STRING`",
+                                        "kind": "query",
+                                        "example": "CNY,EUR,GBP"
+                                    }
+                                ]
+                            },
                             "select": {
                                 "exist": [
                                     "base",
@@ -306,14 +318,7 @@ class Config {
                                     "key",
                                     "symbol"
                                 ]
-                            },
-                            "transform": {
-                                "req": "`reqdata`",
-                                "res": "`body`"
-                            },
-                            "parts": [
-                                "rates"
-                            ]
+                            }
                         }
                     ]
                 }
