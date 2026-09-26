@@ -1,5 +1,5 @@
 {
-  "name": "voxgig-sdk/currency-exchange",
+  "name": "voxgig-sdk/currency-exchange-sdk",
   "description": "Unofficial generated PHP SDK for the Currency Exchange public API. Not affiliated with or endorsed by the upstream API provider.",
   "type": "library",
   "keywords": ["voxgig", "sdk", "generated-sdk", "openapi", "api-client", "currency-exchange"],
