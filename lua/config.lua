@@ -284,7 +284,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "symbol",
-                      ["orig"] = "symbol",
+                      ["orig"] = "symbols",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["example"] = "CNY,EUR,GBP",

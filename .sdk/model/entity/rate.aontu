@@ -89,7 +89,7 @@ main: kit: entity: rate: {
                 ex: "CNY,EUR,GBP"
                 k: "query"
                 n: "symbol"
-                or: "symbol"
+                or: "symbols"
                 r: false
                 t: "`$STRING`"
               }

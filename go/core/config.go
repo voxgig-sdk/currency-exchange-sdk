@@ -288,7 +288,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "symbol",
-											"orig": "symbol",
+											"orig": "symbols",
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "CNY,EUR,GBP",

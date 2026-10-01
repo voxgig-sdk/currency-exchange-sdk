@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 CurrencyExchangeUtility::setRegistrar(function (CurrencyExchangeUtility $u): void {
     $u->clean = [CurrencyExchangeClean::class, 'call'];
+    $u->clean_add = [CurrencyExchangeClean::class, 'add'];
+    $u->clean_explain = [CurrencyExchangeDone::class, 'clean_explain'];
     $u->done = [CurrencyExchangeDone::class, 'call'];
     $u->make_error = [CurrencyExchangeMakeError::class, 'call'];
     $u->feature_add = [CurrencyExchangeFeatureAdd::class, 'call'];

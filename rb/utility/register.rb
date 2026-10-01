@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 CurrencyExchangeUtility.registrar = ->(u) {
   u.clean = CurrencyExchangeUtilities::Clean
+  u.clean_add = CurrencyExchangeUtilities::CleanAdd
+  u.clean_explain = CurrencyExchangeUtilities::CleanExplain
   u.done = CurrencyExchangeUtilities::Done
   u.make_error = CurrencyExchangeUtilities::MakeError
   u.feature_add = CurrencyExchangeUtilities::FeatureAdd
