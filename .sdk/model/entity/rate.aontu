@@ -100,10 +100,12 @@ main: kit: entity: rate: {
           q: {
             exist: [
               "base"
-              "date"
               "key"
-              "symbol"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

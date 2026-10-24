@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -181,11 +182,14 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"amount",
 										"from",
 										"key",
 										"to",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -271,6 +275,7 @@ func MakeConfig() map[string]any {
 											"kind": "query",
 											"reqd": true,
 											"example": "USD",
+											"field": true,
 										},
 										map[string]any{
 											"name": "date",
@@ -278,6 +283,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"example": "2025-06-26",
+											"field": true,
 										},
 										map[string]any{
 											"name": "key",
@@ -298,10 +304,12 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"base",
-										"date",
 										"key",
-										"symbol",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

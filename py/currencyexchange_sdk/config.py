@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -206,11 +207,14 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "amount",
                     "from",
                     "key",
                     "to",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -296,6 +300,7 @@ def make_config():
                       "kind": "query",
                       "reqd": True,
                       "example": "USD",
+                      "field": True,
                     },
                     {
                       "name": "date",
@@ -303,6 +308,7 @@ def make_config():
                       "type": "`$STRING`",
                       "kind": "query",
                       "example": "2025-06-26",
+                      "field": True,
                     },
                     {
                       "name": "key",
@@ -323,10 +329,12 @@ def make_config():
                 "select": {
                   "exist": [
                     "base",
-                    "date",
                     "key",
-                    "symbol",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

@@ -3,11 +3,16 @@ declare(strict_types=1);
 
 // CurrencyExchange SDK utility: prepare_body
 
+require_once __DIR__ . '/Media.php';
+
 class CurrencyExchangePrepareBody
 {
     public static function call(CurrencyExchangeContext $ctx): mixed
     {
         if ($ctx->op->input === 'data') {
+            if (CurrencyExchangeMedia::isRawRequest($ctx->point)) {
+                return CurrencyExchangeMedia::rawBody($ctx->reqdata);
+            }
             $body = ($ctx->utility->transform_request)($ctx);
             // PHP cannot tell an empty map from an empty list, and this
             // vendored struct answers [] where the canonical transform

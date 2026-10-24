@@ -23,13 +23,19 @@ class Convert(TypedDict):
     time_update: dict
 
 
-class ConvertLoadMatchRequired(TypedDict):
-    key: str
-    to: str
+ConvertLoadMatchRequired = TypedDict('ConvertLoadMatchRequired', {
+    "from": str,
+    "key": str,
+    "to": str,
+})
+
+ConvertLoadMatchOptional = TypedDict('ConvertLoadMatchOptional', {
+    "amount": float,
+}, total=False)
 
 
-class ConvertLoadMatch(ConvertLoadMatchRequired, total=False):
-    amount: float
+class ConvertLoadMatch(ConvertLoadMatchRequired, ConvertLoadMatchOptional):
+    pass
 
 
 class RateRequired(TypedDict):

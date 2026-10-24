@@ -67,6 +67,7 @@ local function make_config()
         },
         ["optspec"] = {
           ["clearTimer"] = "`$FUNCTION`",
+          ["now"] = "`$FUNCTION`",
           ["setTimer"] = "`$FUNCTION`",
         },
         ["strict"] = false,
@@ -177,11 +178,14 @@ local function make_config()
                 },
                 ["select"] = {
                   ["exist"] = {
-                    "amount",
                     "from",
                     "key",
                     "to",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },
@@ -267,6 +271,7 @@ local function make_config()
                       ["kind"] = "query",
                       ["reqd"] = true,
                       ["example"] = "USD",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "date",
@@ -274,6 +279,7 @@ local function make_config()
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                       ["example"] = "2025-06-26",
+                      ["field"] = true,
                     },
                     {
                       ["name"] = "key",
@@ -294,10 +300,12 @@ local function make_config()
                 ["select"] = {
                   ["exist"] = {
                     "base",
-                    "date",
                     "key",
-                    "symbol",
                   },
+                },
+                ["response"] = {
+                  ["kind"] = "json",
+                  ["media"] = "application/json",
                 },
               },
             },

@@ -83,11 +83,14 @@ main: kit: entity: convert: {
           o: "/convert"
           q: {
             exist: [
-              "amount"
               "from"
               "key"
               "to"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

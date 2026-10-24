@@ -93,6 +93,7 @@ class CurrencyExchangeConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -203,11 +204,14 @@ class CurrencyExchangeConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'amount',
                       'from',
                       'key',
                       'to',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -293,6 +297,7 @@ class CurrencyExchangeConfig
                         'kind' => 'query',
                         'reqd' => true,
                         'example' => 'USD',
+                        'field' => true,
                       ],
                       [
                         'name' => 'date',
@@ -300,6 +305,7 @@ class CurrencyExchangeConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'example' => '2025-06-26',
+                        'field' => true,
                       ],
                       [
                         'name' => 'key',
@@ -320,10 +326,12 @@ class CurrencyExchangeConfig
                   'select' => [
                     'exist' => [
                       'base',
-                      'date',
                       'key',
-                      'symbol',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],

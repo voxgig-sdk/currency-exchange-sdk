@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -197,11 +198,14 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "amount",
                                     "from",
                                     "key",
                                     "to"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -286,14 +290,16 @@ class Config {
                                         "type": "`$STRING`",
                                         "kind": "query",
                                         "reqd": true,
-                                        "example": "USD"
+                                        "example": "USD",
+                                        "field": true
                                     },
                                     {
                                         "name": "date",
                                         "orig": "date",
                                         "type": "`$STRING`",
                                         "kind": "query",
-                                        "example": "2025-06-26"
+                                        "example": "2025-06-26",
+                                        "field": true
                                     },
                                     {
                                         "name": "key",
@@ -314,10 +320,12 @@ class Config {
                             "select": {
                                 "exist": [
                                     "base",
-                                    "date",
-                                    "key",
-                                    "symbol"
+                                    "key"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

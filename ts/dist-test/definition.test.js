@@ -16,17 +16,39 @@ const PLAN = [
         "path": "/convert",
         "args": [],
         "select": {
-            "amount": 100,
             "from": "USD",
             "key": "v1",
-            "to": "CNY"
+            "to": "CNY",
+            "amount": 100
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "from",
             "to",
             "amount",
             "key"
+        ],
+        "queryArgs": [
+            {
+                "name": "amount",
+                "wire": "amount"
+            },
+            {
+                "name": "from",
+                "wire": "from"
+            },
+            {
+                "name": "key",
+                "wire": "key"
+            },
+            {
+                "name": "to",
+                "wire": "to"
+            }
         ],
         "auth": [
             [
@@ -51,7 +73,8 @@ const PLAN = [
                 "time_zone": "UTC"
             }
         },
-        "idField": "id"
+        "idField": "id",
+        "ownQuery": "key"
     },
     {
         "entity": "rate",
@@ -62,16 +85,38 @@ const PLAN = [
         "args": [],
         "select": {
             "base": "USD",
-            "date": "2025-06-26",
             "key": "v1",
-            "symbol": "v1"
+            "date": "2025-06-26",
+            "symbol": "CNY,EUR,GBP"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "base",
             "date",
             "symbols",
             "key"
+        ],
+        "queryArgs": [
+            {
+                "name": "base",
+                "wire": "base"
+            },
+            {
+                "name": "date",
+                "wire": "date"
+            },
+            {
+                "name": "key",
+                "wire": "key"
+            },
+            {
+                "name": "symbol",
+                "wire": "symbols"
+            }
         ],
         "auth": [
             [
@@ -99,7 +144,8 @@ const PLAN = [
                 "time_zone": "UTC"
             }
         },
-        "idField": "id"
+        "idField": "id",
+        "ownQuery": "key"
     }
 ];
 (0, node_test_1.describe)('definition', () => {

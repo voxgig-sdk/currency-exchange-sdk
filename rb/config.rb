@@ -79,6 +79,7 @@ module CurrencyExchangeConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -189,11 +190,14 @@ module CurrencyExchangeConfig
                   },
                   "select" => {
                     "exist" => [
-                      "amount",
                       "from",
                       "key",
                       "to",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -279,6 +283,7 @@ module CurrencyExchangeConfig
                         "kind" => "query",
                         "reqd" => true,
                         "example" => "USD",
+                        "field" => true,
                       },
                       {
                         "name" => "date",
@@ -286,6 +291,7 @@ module CurrencyExchangeConfig
                         "type" => "`$STRING`",
                         "kind" => "query",
                         "example" => "2025-06-26",
+                        "field" => true,
                       },
                       {
                         "name" => "key",
@@ -306,10 +312,12 @@ module CurrencyExchangeConfig
                   "select" => {
                     "exist" => [
                       "base",
-                      "date",
                       "key",
-                      "symbol",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
